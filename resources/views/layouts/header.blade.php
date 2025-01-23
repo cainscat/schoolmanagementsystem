@@ -110,8 +110,7 @@
             <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
           </div>
         </li>
-        <!--end::Messages Dropdown Menu-->
-        <!--begin::Notifications Dropdown Menu-->
+
         <li class="nav-item dropdown">
           <a class="nav-link" data-bs-toggle="dropdown" href="#">
             <i class="bi bi-bell-fill"></i>
@@ -138,65 +137,38 @@
             <a href="#" class="dropdown-item dropdown-footer"> See All Notifications </a>
           </div>
         </li>
-        <!--end::Notifications Dropdown Menu-->
-        <!--begin::Fullscreen Toggle-->
+
         <li class="nav-item">
           <a class="nav-link" href="#" data-lte-toggle="fullscreen">
             <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
             <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none"></i>
           </a>
         </li>
-        <!--end::Fullscreen Toggle-->
-        <!--begin::User Menu Dropdown-->
+
         <li class="nav-item dropdown user-menu">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-            <img
-              src="{{ url('public/dist/assets/img/user2-160x160.jpg') }}"
-              class="user-image rounded-circle shadow"
-              alt="User Image"
-            />
-            <span class="d-none d-md-inline">Alexander Pierce</span>
+            <img src="{{ url('public/dist/assets/img/user2-160x160.jpg') }}" class="user-image rounded-circle shadow" alt="User Image"/>
+            <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
           </a>
-          <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-            <!--begin::User Image-->
-            <li class="user-header text-bg-primary">
-              <img
-                src="{{ url('public/dist/assets/img/user2-160x160.jpg') }}"
-                class="rounded-circle shadow"
-                alt="User Image"
-              />
+          <ul style="min-width: 250px;max-width: 250px;" class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+
+            <li style="min-height: 150px;padding: 2px;" class="user-header text-bg-primary">
+              <img src="{{ url('public/dist/assets/img/user2-160x160.jpg') }}" class="rounded-circle shadow" alt="User Image"/>
               <p>
-                Alexander Pierce - Web Developer
-                <small>Member since Nov. 2023</small>
+                {{ Auth::user()->name }}
+                <small>Member since {{ Auth::user()->created_at }}</small>
               </p>
             </li>
-            <!--end::User Image-->
-            <!--begin::Menu Body-->
-            <li class="user-body">
-              <!--begin::Row-->
-              <div class="row">
-                <div class="col-4 text-center"><a href="#">Followers</a></div>
-                <div class="col-4 text-center"><a href="#">Sales</a></div>
-                <div class="col-4 text-center"><a href="#">Friends</a></div>
-              </div>
-              <!--end::Row-->
-            </li>
-            <!--end::Menu Body-->
-            <!--begin::Menu Footer-->
             <li class="user-footer">
               <a href="#" class="btn btn-default btn-flat">Profile</a>
-              <a href="#" class="btn btn-default btn-flat float-end">Sign out</a>
+              <a href="{{ url('logout') }}" class="btn btn-default btn-flat float-end">Log out</a>
             </li>
-            <!--end::Menu Footer-->
+
           </ul>
         </li>
-        <!--end::User Menu Dropdown-->
       </ul>
-      <!--end::End Navbar Links-->
     </div>
-    <!--end::Container-->
   </nav>
-  <!--end::Header-->
 
   <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
 
@@ -209,19 +181,54 @@
     <div class="sidebar-wrapper">
       <nav class="mt-2">
         <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
-          <li class="nav-item">
-            <a href="{{ url('admin/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
-                <i class="nav-icon bi bi-speedometer"></i>
-                <p>Dashboard</p>
-            </a>
-        </li>
 
-        <li class="nav-item">
-            <a href="{{ url('admin/admin/list') }}" class="nav-link @if(Request::segment(2) == 'admin') active @endif">
-                <i class="nav-icon bi bi-person-fill"></i>
-                <p>Admin</p>
-            </a>
-        </li>
+            @if(Auth::user()->user_type == 1)
+                <li class="nav-item">
+                    <a href="{{ url('admin/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('admin/admin/list') }}" class="nav-link @if(Request::segment(2) == 'admin') active @endif">
+                        <i class="nav-icon bi bi-person-fill"></i>
+                        <p>Admin</p>
+                    </a>
+                </li>
+
+            @elseif(Auth::user()->user_type == 2)
+                <li class="nav-item">
+                    <a href="{{ url('teacher/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+
+            @elseif(Auth::user()->user_type == 3)
+                <li class="nav-item">
+                    <a href="{{ url('student/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+
+            @elseif(Auth::user()->user_type == 4)
+                <li class="nav-item">
+                    <a href="{{ url('parent/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+
+            @endif
+
+            <li class="nav-item">
+                <a href="{{ url('logout') }}" class="nav-link @if(Request::segment(2) == 'logout') active @endif">
+                    <i class="nav-icon bi bi-person-fill"></i>
+                    <p>Logout</p>
+                </a>
+            </li>
 
         </ul>
 

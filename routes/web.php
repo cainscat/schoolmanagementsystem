@@ -7,6 +7,7 @@ use App\Http\Middleware\StudentMiddleware;
 use App\Http\Middleware\ParentMiddleware;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 
 // Route::get('/', function () {
@@ -23,32 +24,21 @@ Route::get('admin/admin/list', function () {
 });
 
 Route::middleware(AdminMiddleware::class)->group(function () {
-    Route::get('admin/dashboard', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
 
 });
 
 Route::middleware(TeacherMiddleware::class)->group(function () {
-    Route::get('teacher/dashboard', function () {
-        return view('admin.dashboard');
-    });
-
+    Route::get('teacher/dashboard', [DashboardController::class, 'dashboard']);
 
 });
 
 Route::middleware(StudentMiddleware::class)->group(function () {
-    Route::get('student/dashboard', function () {
-        return view('admin.dashboard');
-    });
-
+    Route::get('student/dashboard', [DashboardController::class, 'dashboard']);
 
 });
 
 Route::middleware(ParentMiddleware::class)->group(function () {
-    Route::get('parent/dashboard', function () {
-        return view('admin.dashboard');
-    });
-
+    Route::get('parent/dashboard', [DashboardController::class, 'dashboard']);
 
 });
