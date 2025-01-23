@@ -54,7 +54,7 @@
         </div> --}}
         <div class="card-body login-card-body">
             @include('_message')
-          <p class="login-box-msg">Sign In</p>
+          <h2 class="login-box-msg"><b>Log In</b></h2>
           <form action="{{ url('login') }}" method="post">
             {{ csrf_field() }}
             <div class="input-group mb-1">
