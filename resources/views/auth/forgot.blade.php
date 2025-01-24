@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Login</title>
+    <title>Forgot Password</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="title" content="AdminLTE 4 | Login Page v2" />
     <meta name="author" content="ColorlibHQ" />
@@ -40,8 +40,8 @@
       <div class="card card-outline card-primary">
         <div class="card-body login-card-body">
             @include('_message')
-          <h2 class="login-box-msg"><b>Log In</b></h2>
-          <form action="{{ url('login') }}" method="post">
+          <h2 class="login-box-msg"><b>Forgot Password</b></h2>
+          <form action="" method="post">
             {{ csrf_field() }}
             <div class="input-group mb-1">
               <div class="form-floating">
@@ -51,30 +51,21 @@
               <div class="input-group-text"><span class="bi bi-envelope"></span></div>
             </div>
             <div class="input-group mb-1">
-              <div class="form-floating">
-                <input name="password" type="password" required class="form-control" placeholder="" />
-                <label for="loginPassword">Password</label>
-              </div>
-              <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
             </div>
 
             <div class="row">
               <div class="col-8 d-inline-flex align-items-center">
-                <div class="form-check">
-                  <input class="form-check-input" name="remember" type="checkbox" value="" id="remember" />
-                  <label class="form-check-label" for="remember"> Remember Me </label>
-                </div>
               </div>
 
               <div class="col-4">
                 <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-primary">Sign In</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
               </div>
             </div>
           </form>
 
-          <p class="mb-1"><a href="{{ url('forgot-password') }}">I forgot my password</a></p>
+          <p class="mb-1"><a href="{{ url('') }}">Go back to login</a></p>
 
         </div>
       </div>

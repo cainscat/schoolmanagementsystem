@@ -9,15 +9,13 @@ use App\Http\Middleware\ParentMiddleware;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', [AuthController::class, 'login']);
 Route::post('login', [AuthController::class, 'AuthLogin']);
 Route::get('logout', [AuthController::class, 'logout']);
-
+Route::get('forgot-password', [AuthController::class, 'forgot_password']);
+Route::post('forgot-password', [AuthController::class, 'post_forgot_password']);
+Route::get('reset/{token}', [AuthController::class, 'reset_password']);
+Route::post('reset/{token}', [AuthController::class, 'post_reset_password']);
 
 Route::get('admin/admin/list', function () {
     return view('admin.admin.list');
