@@ -33,23 +33,23 @@
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Status</th>
+                                        <th>Created Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($getRecord as $value)
+                                    @foreach ($getRecord as $value)
                                         <tr class="align-middle">
                                             <td>{{ $value->id }}</td>
                                             <td>{{ $value->name }}</td>
                                             <td>{{ $value->email }}</td>
-                                            <td>{{ ($value->status == 0) ? 'Active' : 'InActive' }}</td>
+                                            <td>{{ $value->created_at }}</td>
                                             <td>
                                                 <a href="{{ url('admin/admin/edit/'.$value->id) }}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
                                                 <a href="{{ url('admin/admin/delete/'.$value->id) }}" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a>
                                             </td>
                                         </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div> <!-- /.card-body -->
