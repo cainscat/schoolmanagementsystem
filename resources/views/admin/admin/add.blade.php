@@ -33,13 +33,6 @@
                                     <label>Password</label>
                                     <input type="password" class="form-control" required name="password" placeholder="Enter Password">
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label>Status</label>
-                                    <select class="form-control" name="status">
-                                        <option {{ (old('status') == 0) ? 'selected' : '' }} value="0">Active</option>
-                                        <option {{ (old('status') == 0) ? 'selected' : '' }} value="1">InActive</option>
-                                    </select>
-                                </div> --}}
                             </div>
                             <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div>
                         </form>
