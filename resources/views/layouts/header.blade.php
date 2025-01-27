@@ -182,6 +182,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ url('admin/subject/list') }}" class="nav-link @if(Request::segment(2) == 'subject') active @endif">
+                        <i class="nav-icon bi bi-door-closed-fill"></i>
+                        <p>Subject</p>
+                    </a>
+                </li>
+
 
             @elseif(Auth::user()->user_type == 2)
                 <li class="nav-item">
