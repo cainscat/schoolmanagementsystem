@@ -38,4 +38,16 @@ Class SubjectModel extends Model
         return $return;
     }
 
+    static public function getSubject()
+    {
+        $return = self::select('subject.*')
+                ->join('users', 'users.id', 'subject.created_by')
+                ->where('subject.is_delete', '=', 0)
+                ->where('subject.status', '=', 0)
+                ->orderBy('subject.name', 'asc')
+                ->get();
+
+        return $return;
+    }
+
 }
