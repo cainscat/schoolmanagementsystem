@@ -176,6 +176,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ url('admin/student/list') }}" class="nav-link @if(Request::segment(2) == 'student') active @endif">
+                        <i class="nav-icon bi bi-person-fill"></i>
+                        <p>Student</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ url('admin/class/list') }}" class="nav-link @if(Request::segment(2) == 'class') active @endif">
                         <i class="nav-icon bi bi-door-closed-fill"></i>
                         <p>Class</p>
