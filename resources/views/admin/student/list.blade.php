@@ -53,18 +53,32 @@
                         </form>
                     </div> --}}
 
-                    <div class="card mb-4">
+                    <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Student List</h3>
                         </div>
-                        <div class="card-body p-0">
+                        <div class="card-body p-0" style="overflow: auto;">
                             <table class="table table-striped">
                                 <thead>
-                                    <tr>
+                                    <tr style="text-align: center;">
                                         <th>#</th>
-                                        <th>Name</th>
+                                        <th style="min-width: 100px;">Name</th>
+                                        <th>Picture</th>
+                                        <th>Gender</th>
+                                        <th style="min-width: 100px;">Date of Birth</th>
+                                        <th>Height</th>
+                                        <th>Weight</th>
+                                        <th>Blood Group</th>
+                                        <th>Religion</th>
+                                        <th>Class</th>
+                                        <th>Admission Number</th>
+                                        <th style="min-width: 100px;">Admission Date</th>
+                                        <th>Mobile Number</th>
                                         <th>Email</th>
-                                        <th>Created Date</th>
+                                        <th>Roll Number</th>
+                                        <th>Caste</th>
+                                        <th style="min-width: 100px;">Created Date</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -72,10 +86,36 @@
                                     @foreach ($getRecord as $value)
                                         <tr class="align-middle">
                                             <td>{{ $value->id }}</td>
-                                            <td>{{ $value->name }}</td>
-                                            <td>{{ $value->email }}</td>
-                                            <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>
+                                            <td>{{ $value->name }} {{ $value->last_name }}</td>
                                             <td>
+                                                @if(!empty($value->getProfile()))
+                                                    <img style="width: 100px;" src="{{ $value->getProfile() }}">
+                                                @endif
+                                            </td>
+                                            <td>{{ $value->gender }}</td>
+                                            <td>
+                                                @if(!empty($value->date_of_birth))
+                                                    {{ date('d-m-Y', strtotime($value->date_of_birth)) }}
+                                                @endif
+                                            </td>
+                                            <td>{{ $value->height }}</td>
+                                            <td>{{ $value->weight }}</td>
+                                            <td>{{ $value->blood_group }}</td>
+                                            <td>{{ $value->religion }}</td>
+                                            <td>{{ $value->class_name }}</td>
+                                            <td>{{ $value->admission_number }}</td>
+                                            <td>
+                                                @if(!empty($value->date_of_birth))
+                                                    {{ date('d-m-Y', strtotime($value->admission_date)) }}
+                                                @endif
+                                            </td>
+                                            <td>{{ $value->mobile_number }}</td>
+                                            <td>{{ $value->email }}</td>
+                                            <td>{{ $value->roll_number }}</td>
+                                            <td>{{ $value->caste }}</td>
+                                            <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>
+                                            <td>{{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
+                                            <td style="min-width: 120px;">
                                                 <a href="{{ url('admin/student/edit/'.$value->id) }}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
                                                 <a href="{{ url('admin/student/delete/'.$value->id) }}" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a>
                                             </td>

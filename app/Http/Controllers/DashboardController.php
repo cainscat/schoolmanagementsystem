@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use Auth;
 
 class DashboardController extends Controller
@@ -28,5 +27,4 @@ class DashboardController extends Controller
             return view('parent.dashboard', $data);
         }
     }
-
 }
