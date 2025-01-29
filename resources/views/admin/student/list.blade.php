@@ -21,21 +21,85 @@
                 <div class="col-md-12">
                     @include('layouts._message')
 
-                    {{-- <div class="card card-primary">
+                    <div class="card card-primary">
                         <form action="" method="get">
                             <div class="card-header">
                                 <h3 class="card-title">Search</h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="form-group col-md-3">
-                                        <label>Name</label>
-                                        <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name" placeholder="Enter Name">
+                                    <div class="form-group col-md-2">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name" placeholder="First Name">
                                     </div>
 
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-2">
+                                        <label>Last Name</label>
+                                        <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name" placeholder="Last Name">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
                                         <label>Email</label>
-                                        <input type="text" class="form-control" value="{{ Request::get('email') }}" name="email" placeholder="Enter Email">
+                                        <input type="text" class="form-control" value="{{ Request::get('email') }}" name="email" placeholder="Email">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Class</label>
+                                        <input type="text" class="form-control" value="{{ Request::get('class') }}" name="class" placeholder="Class">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Admission Number</label>
+                                        <input type="text" class="form-control" value="{{ Request::get('admission_number') }}" name="admission_number" placeholder="Admission Number">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Admission Date</label>
+                                        <input type="date" class="form-control" value="{{ Request::get('admission_date') }}" name="admission_date">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Roll Number</label>
+                                        <input type="text" class="form-control" value="{{ Request::get('roll_number') }}" name="roll_number" placeholder="Roll Number">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Blood Group</label>
+                                        <input type="text" class="form-control" value="{{ Request::get('blood_group') }}" name="blood_group" placeholder="Blood Group">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Religion</label>
+                                        <input type="text" class="form-control" value="{{ Request::get('religion') }}" name="religion" placeholder="Religion">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Caste</label>
+                                        <input type="text" class="form-control" value="{{ Request::get('caste') }}" name="caste" placeholder="Caste">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Gender</label>
+                                        <select class="form-control" name="gender">
+                                            <option value="">Select Gender</option>
+                                            <option {{ (Request::get('gender') == 'male') ? 'selected' : '' }} value="male">Male</option>
+                                            <option {{ (Request::get('gender') == 'female') ? 'selected' : '' }} value="female">Female</option>
+                                            <option {{ (Request::get('gender') == 'other') ? 'selected' : '' }} value="other">Other</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Mobile Number</label>
+                                        <input type="text" class="form-control" value="{{ Request::get('mobie_number') }}" name="mobie_number" placeholder="Mobile Number">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Status</label>
+                                        <select class="form-control" name="status">
+                                            <option value="">Select Status</option>
+                                            <option {{ (Request::get('status') == 100) ? 'selected' : '' }} value="100">Active</option>
+                                            <option {{ (Request::get('status') == 1) ? 'selected' : '' }} value="1">InActive</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group col-md-2">
@@ -51,7 +115,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div> --}}
+                    </div>
 
                     <div class="card">
                         <div class="card-header">
