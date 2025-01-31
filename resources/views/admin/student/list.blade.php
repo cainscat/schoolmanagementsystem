@@ -126,8 +126,9 @@
                                 <thead>
                                     <tr style="text-align: center;">
                                         <th>#</th>
-                                        <th style="min-width: 100px;">Name</th>
                                         <th>Picture</th>
+                                        <th style="min-width: 100px;">Student Name</th>
+                                        <th style="min-width: 100px;">Parent Name</th>
                                         <th>Gender</th>
                                         <th style="min-width: 100px;">Date of Birth</th>
                                         <th>Height</th>
@@ -150,12 +151,13 @@
                                     @foreach ($getRecord as $value)
                                         <tr class="align-middle">
                                             <td>{{ $value->id }}</td>
-                                            <td>{{ $value->name }} {{ $value->last_name }}</td>
                                             <td>
                                                 @if(!empty($value->getProfile()))
                                                     <img style="width: 100px;" src="{{ $value->getProfile() }}">
                                                 @endif
                                             </td>
+                                            <td>{{ $value->name }} {{ $value->last_name }}</td>
+                                            <td>{{ $value->parent_name }} {{ $value->parent_last_name }}</td>
                                             <td>{{ $value->gender }}</td>
                                             <td>
                                                 @if(!empty($value->date_of_birth))
