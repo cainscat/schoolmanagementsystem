@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Edit Teacher</h3>
+                    <h3 class="mb-0">My Account</h3>
                 </div>
             </div>
         </div>
@@ -62,9 +62,9 @@
                                     </div>
 
                                     <div class="form-group col-md-3">
-                                        <label>Marital Status <span style="color: red;"></span></label>
-                                        <input type="text" class="form-control" value="{{ old('marital_status', $getRecord->marital_status) }}" name="marital_status" placeholder="Marital Status">
-                                        <div style="color: red">{{ $errors->first('marital_status') }}</div>
+                                        <label>Mobile Number <span style="color: red;"></span></label>
+                                        <input type="text" class="form-control" value="{{ old('mobile_number', $getRecord->mobile_number) }}" name="mobile_number" placeholder="Mobile Number">
+                                        <div style="color: red">{{ $errors->first('mobile_number') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-3">
@@ -80,15 +80,9 @@
                                     </div>
 
                                     <div class="form-group col-md-3">
-                                        <label>Mobile Number <span style="color: red;"></span></label>
-                                        <input type="text" class="form-control" value="{{ old('mobile_number', $getRecord->mobile_number) }}" name="mobile_number" placeholder="Mobile Number">
-                                        <div style="color: red">{{ $errors->first('mobile_number') }}</div>
-                                    </div>
-
-                                    <div class="form-group col-md-3">
-                                        <label>Date Joining <span style="color: red;"></span></label>
-                                        <input type="date" class="form-control" value="{{ old('admission_date', $getRecord->admission_date) }}" name="admission_date">
-                                        <div style="color: red">{{ $errors->first('admission_date') }}</div>
+                                        <label>Work Experience <span style="color: red;"></span></label>
+                                        <input type="text" class="form-control" value="{{ old('work_experience', $getRecord->work_experience) }}" name="work_experience" placeholder="Work Experience">
+                                        <div style="color: red">{{ $errors->first('work_experience') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-3">
@@ -98,25 +92,9 @@
                                     </div>
 
                                     <div class="form-group col-md-3">
-                                        <label>Work Experience <span style="color: red;"></span></label>
-                                        <input type="text" class="form-control" value="{{ old('work_experience', $getRecord->work_experience) }}" name="work_experience" placeholder="Work Experience">
-                                        <div style="color: red">{{ $errors->first('work_experience') }}</div>
-                                    </div>
-
-                                    <div class="form-group col-md-3">
-                                        <label>Note <span style="color: red;"></span></label>
-                                        <input type="text" class="form-control" value="{{ old('note', $getRecord->note) }}" name="note" placeholder="Note">
-                                        <div style="color: red">{{ $errors->first('note') }}</div>
-                                    </div>
-
-                                    <div class="form-group col-md-3">
-                                        <label>Status <span style="color: red;">*</span></label>
-                                        <select class="form-control" required name="status">
-                                            <option value="">Select Status</option>
-                                            <option {{ (old('status', $getRecord->status) == 0) ? 'selected' : '' }} value="0">Active</option>
-                                            <option {{ (old('status', $getRecord->status) == 1) ? 'selected' : '' }} value="1">Inactive</option>
-                                        </select>
-                                        <div style="color: red">{{ $errors->first('status') }}</div>
+                                        <label>Marital Status <span style="color: red;"></span></label>
+                                        <input type="text" class="form-control" value="{{ old('marital_status', $getRecord->marital_status) }}" name="marital_status" placeholder="Marital Status">
+                                        <div style="color: red">{{ $errors->first('marital_status') }}</div>
                                     </div>
 
                                 </div>
@@ -126,13 +104,11 @@
                                     <input type="email" class="form-control" required value="{{ old('email' , $getRecord->email) }}" name="email" placeholder="Enter Email">
                                     <div style="color: red">{{ $errors->first('email') }}</div>
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label>Password <span style="color: red;"></span></label>
                                     <input type="text" class="form-control" name="password" placeholder="Enter Password">
                                     <p>Do you want to change password, so please add new password</p>
-                                </div>
-
-
+                                </div> --}}
                             </div>
                             <div class="card-footer"> <button type="submit" class="btn btn-primary">Submit</button> </div>
                         </form>
