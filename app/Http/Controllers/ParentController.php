@@ -159,4 +159,13 @@ class ParentController extends Controller
         return redirect()->back()->with('success', "Student successfully assign deleted");
 
     }
+
+    //Parent side
+    public function my_student_list()
+    {
+        $id = Auth::user()->id;
+        $data['getRecord'] = User::getMyStudent($id);
+        $data['header_title'] = "My Student";
+        return view('parent.my_student', $data);
+    }
 }
