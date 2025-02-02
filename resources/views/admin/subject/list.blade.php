@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Subject List (Total:)</h3>
+                    <h3 class="mb-0">Subject List</h3>
                 </div>
                 <div class="col-sm-6" style="text-align: right;">
                     <a href="{{ url('admin/subject/add') }}" class="btn btn-primary">Add New Subject</a>
