@@ -196,32 +196,44 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ url('admin/class/list') }}" class="nav-link @if(Request::segment(2) == 'class') active @endif">
-                        <i class="nav-icon bi bi-door-closed-fill"></i>
-                        <p>Class</p>
+                <li class="nav-item @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'assign_subject' || Request::segment(2) == 'assign_class_teacher') menu-open @endif">
+                    <a href="#" class="nav-link @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'assign_subject' || Request::segment(2) == 'assign_class_teacher') active @endif">
+                      <i class="nav-icon bi bi-table"></i>
+                      <p>
+                        Academics
+                        <i class="nav-arrow bi bi-chevron-right"></i>
+                      </p>
                     </a>
-                </li>
 
-                <li class="nav-item">
-                    <a href="{{ url('admin/subject/list') }}" class="nav-link @if(Request::segment(2) == 'subject') active @endif">
-                        <i class="nav-icon bi bi-door-closed-fill"></i>
-                        <p>Subject</p>
-                    </a>
-                </li>
+                    <ul class="nav nav-treeview" style="box-sizing: border-box;">
+                        <li class="nav-item">
+                        <a href="{{ url('admin/class/list') }}" class="nav-link @if(Request::segment(2) == 'class') active @endif">
+                            <i class="nav-icon bi bi-circle"></i>
+                            <p>Class</p>
+                        </a>
+                        </li>
 
-                <li class="nav-item">
-                    <a href="{{ url('admin/assign_subject/list') }}" class="nav-link @if(Request::segment(2) == 'assign_subject') active @endif">
-                        <i class="nav-icon bi bi-door-closed-fill"></i>
-                        <p>Assign Subject</p>
-                    </a>
-                </li>
+                        <li class="nav-item">
+                            <a href="{{ url('admin/subject/list') }}" class="nav-link @if(Request::segment(2) == 'subject') active @endif">
+                                <i class="nav-icon bi bi-circle"></i>
+                            <p>Subject</p>
+                            </a>
+                        </li>
 
-                <li class="nav-item">
-                    <a href="{{ url('admin/assign_class_teacher/list') }}" class="nav-link @if(Request::segment(2) == 'assign_class_teacher') active @endif">
-                        <i class="nav-icon bi bi-door-closed-fill"></i>
-                        <p>Assign Class Teacher</p>
-                    </a>
+                        <li class="nav-item">
+                            <a href="{{ url('admin/assign_subject/list') }}" class="nav-link @if(Request::segment(2) == 'assign_subject') active @endif">
+                                <i class="nav-icon bi bi-circle"></i>
+                            <p>Assign Subject</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ url('admin/assign_class_teacher/list') }}" class="nav-link @if(Request::segment(2) == 'assign_class_teacher') active @endif">
+                                <i class="nav-icon bi bi-circle"></i>
+                            <p>Assign Class Teacher</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="nav-item">
