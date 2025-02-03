@@ -2,20 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\ParentMiddleware;
 use App\Http\Middleware\TeacherMiddleware;
 use App\Http\Middleware\StudentMiddleware;
-use App\Http\Middleware\ParentMiddleware;
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassController;
-use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\ClassSubjectController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ClassSubjectController;
+use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\AssignClassTeacherController;
 
 Route::get('/', [AuthController::class, 'login']);
@@ -100,6 +101,8 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::post('admin/assign_class_teacher/edit_single/{id}', [AssignClassTeacherController::class, 'update_single']);
     Route::get('admin/assign_class_teacher/delete/{id}', [AssignClassTeacherController::class, 'delete']);
 
+    Route::get('admin/class_timetable/list', [ClassTimetableController::class, 'list']);
+    Route::post('admin/class_timetable/get_subject', [ClassTimetableController::class, 'get_subject']);
 
     Route::get('admin/change_password', [UserController::class, 'change_password']);
     Route::post('admin/change_password', [UserController::class, 'update_change_password']);
