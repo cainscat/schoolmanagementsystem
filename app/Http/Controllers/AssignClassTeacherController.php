@@ -148,4 +148,12 @@ class AssignClassTeacherController extends Controller
         }
     }
 
+    //teacher side work
+    public function my_class_subject()
+    {
+        $data['getRecord'] = AssignClassTeacherModel::getMyClassSubject(Auth::user()->id);
+        $data['header_title'] = "My Class & Subject";
+        return view('teacher.my_class_subject', $data);
+    }
+
 }
