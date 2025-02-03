@@ -42,6 +42,7 @@
                                         <th>Roll Number</th>
                                         <th>Caste</th>
                                         <th style="min-width: 100px;">Created Date</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,6 +76,9 @@
                                             <td>{{ $value->roll_number }}</td>
                                             <td>{{ $value->caste }}</td>
                                             <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm" href="{{ url('parent/my_student/subject/'.$value->id) }}">Subject</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

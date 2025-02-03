@@ -129,5 +129,6 @@ Route::middleware(ParentMiddleware::class)->group(function () {
     Route::post('parent/account', [UserController::class, 'update_my_account_parent']);
 
     Route::get('parent/my_student', [ParentController::class, 'my_student_list']);
+    Route::get('parent/my_student/subject/{student_id}', [SubjectController::class, 'parent_student_subject']);
 
 });
