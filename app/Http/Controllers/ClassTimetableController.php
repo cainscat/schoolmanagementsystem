@@ -7,6 +7,7 @@ use App\Models\ClassSubjectTimetableModel;
 use App\Models\ClassSubjectModel;
 use App\Models\ClassModel;
 use App\Models\WeekModel;
+use Auth;
 
 class ClassTimetableController extends Controller
 {
@@ -29,7 +30,7 @@ class ClassTimetableController extends Controller
             if(!empty($request->class_id) && !empty($request->subject_id))
             {
                 $ClassSubject = ClassSubjectTimetableModel::getRecordClassSubject($request->class_id, $request->subject_id, $value->id);
-                if(!empty($ClassSubject ))
+                if(!empty($ClassSubject))
                 {
                     $dataW['start_time'] = $ClassSubject->start_time;
                     $dataW['end_time'] = $ClassSubject->end_time;
@@ -93,6 +94,48 @@ class ClassTimetableController extends Controller
         }
 
         return redirect()->back()->with('success', "Class Timetable successfully saved");
+    }
+
+    //Student side
+    public function my_timetable_student()
+    {
+        $result = array();
+        $getRecord = ClassSubjectModel::mySubject(Auth::user()->class_id);
+        foreach($getRecord as $value)
+        {
+            $dataS['name'] = $value->subject_name;
+
+            $getWeek = WeekModel::getRecord();
+            $week = array();
+            foreach($getWeek as $valueW)
+            {
+                $dataW = array();
+                $dataW['week_name'] = $valueW->name;
+
+                $ClassSubject = ClassSubjectTimetableModel::getRecordClassSubject($value->class_id, $value->subject_id, $valueW->id);
+                if(!empty($ClassSubject))
+                {
+                    $dataW['start_time'] = $ClassSubject->start_time;
+                    $dataW['end_time'] = $ClassSubject->end_time;
+                    $dataW['room_number'] = $ClassSubject->room_number;
+                }
+                else
+                {
+                    $dataW['start_time'] = '';
+                    $dataW['end_time'] = '';
+                    $dataW['room_number'] = '';
+                }
+                $week[] = $dataW;
+            }
+
+            $dataS['week'] = $week;
+            $result[] = $dataS;
+        }
+
+        $data['getRecord'] = $result;
+
+        $data['header_title'] = "My Timetable";
+        return view('student.my_timetable', $data);
     }
 
 }
