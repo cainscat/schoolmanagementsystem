@@ -8,6 +8,7 @@ use App\Models\ClassSubjectModel;
 use App\Models\SubjectModel;
 use App\Models\ClassModel;
 use App\Models\WeekModel;
+use App\Models\User;
 use Auth;
 
 class ClassTimetableController extends Controller
@@ -173,6 +174,43 @@ class ClassTimetableController extends Controller
 
         $data['header_title'] = "My Timetable";
         return view('teacher.my_timetable', $data);
+    }
+
+    //parent side
+    public function my_timetable_parent($class_id, $subject_id, $student_id)
+    {
+        $data['getClass'] = ClassModel::getSingle($class_id);
+        $data['getSubject'] = SubjectModel::getSingle($subject_id);
+        $data['getStudent'] = User::getSingle($student_id);
+
+        $getWeek = WeekModel::getRecord();
+        $week = array();
+        foreach($getWeek as $valueW)
+        {
+            $dataW = array();
+            $dataW['week_name'] = $valueW->name;
+
+            $ClassSubject = ClassSubjectTimetableModel::getRecordClassSubject($class_id, $subject_id, $valueW->id);
+            if(!empty($ClassSubject))
+            {
+                $dataW['start_time'] = $ClassSubject->start_time;
+                $dataW['end_time'] = $ClassSubject->end_time;
+                $dataW['room_number'] = $ClassSubject->room_number;
+            }
+            else
+            {
+                $dataW['start_time'] = '';
+                $dataW['end_time'] = '';
+                $dataW['room_number'] = '';
+            }
+
+            $result[] = $dataW;
+        }
+
+        $data['getRecord'] = $result;
+
+        $data['header_title'] = "My Timetable";
+        return view('parent.my_timetable', $data);
     }
 
 }
