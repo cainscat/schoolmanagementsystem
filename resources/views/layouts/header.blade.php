@@ -243,6 +243,33 @@
                     </ul>
                 </li>
 
+                <li class="nav-item @if(Request::segment(2) == 'examinations') menu-open @endif">
+                    <a href="#" class="nav-link @if(Request::segment(2) == 'examinations') active @endif">
+                      <i class="nav-icon bi bi-table"></i>
+                      <p>
+                        Examinations
+                        <i class="nav-arrow bi bi-chevron-right"></i>
+                      </p>
+                    </a>
+
+                    <ul class="nav nav-treeview" style="box-sizing: border-box;">
+                        <li class="nav-item">
+                        <a href="{{ url('admin/examinations/exam/list') }}" class="nav-link @if(Request::segment(3) == 'exam') active @endif">
+                            <i class="nav-icon bi bi-circle"></i>
+                            <p>Exam</p>
+                        </a>
+                        </li>
+
+                        {{-- <li class="nav-item">
+                            <a href="{{ url('admin/examinations/list') }}" class="nav-link @if(Request::segment(2) == 'subject') active @endif">
+                                <i class="nav-icon bi bi-circle"></i>
+                            <p>Exam Schedule</p>
+                            </a>
+                        </li> --}}
+
+                    </ul>
+                </li>
+
                 <li class="nav-item">
                     <a href="{{ url('admin/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>

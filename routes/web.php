@@ -16,6 +16,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClassSubjectController;
+use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\AssignClassTeacherController;
 
@@ -110,6 +111,13 @@ Route::middleware(AdminMiddleware::class)->group(function () {
 
     Route::get('admin/account', [UserController::class, 'my_account']);
     Route::post('admin/account', [UserController::class, 'update_my_account']);
+
+    Route::get('admin/examinations/exam/list', [ExaminationsController::class, 'exam_list']);
+    Route::get('admin/examinations/exam/add', [ExaminationsController::class, 'exam_add']);
+    Route::post('admin/examinations/exam/add', [ExaminationsController::class, 'exam_insert']);
+    Route::get('admin/examinations/exam/edit/{id}', [ExaminationsController::class, 'exam_edit']);
+    Route::post('admin/examinations/exam/edit/{id}', [ExaminationsController::class, 'exam_update']);
+    Route::get('admin/examinations/exam/delete/{id}', [ExaminationsController::class, 'exam_delete']);
 
 });
 
