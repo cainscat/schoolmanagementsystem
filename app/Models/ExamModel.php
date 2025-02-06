@@ -33,4 +33,15 @@ class ExamModel extends Model
         return $return;
     }
 
+    static public function getExam()
+    {
+        $return = self::select('exam.*')
+                    ->join('users','users.id','=','exam.created_by')
+                    ->where('exam.is_delete', '=', '0')
+                    ->orderBy('exam.name', 'asc')
+                    ->get();
+
+        return $return;
+    }
+
 }

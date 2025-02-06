@@ -260,12 +260,12 @@
                         </a>
                         </li>
 
-                        {{-- <li class="nav-item">
-                            <a href="{{ url('admin/examinations/list') }}" class="nav-link @if(Request::segment(2) == 'subject') active @endif">
+                        <li class="nav-item">
+                            <a href="{{ url('admin/examinations/exam_schedule') }}" class="nav-link @if(Request::segment(3) == 'exam_shedule') active @endif">
                                 <i class="nav-icon bi bi-circle"></i>
                             <p>Exam Schedule</p>
                             </a>
-                        </li> --}}
+                        </li>
 
                     </ul>
                 </li>
