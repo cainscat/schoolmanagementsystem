@@ -76,8 +76,9 @@
                                             <td>{{ $value->roll_number }}</td>
                                             <td>{{ $value->caste }}</td>
                                             <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm" href="{{ url('parent/my_student/subject/'.$value->id) }}">Subject</a>
+                                            <td style="min-width: 220px;">
+                                                <a class="btn btn-success btn-sm" href="{{ url('parent/my_student/subject/'.$value->id) }}">Subject</a>
+                                                <a class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_timetable/'.$value->id) }}">Exam Timetable</a>
                                             </td>
                                         </tr>
                                     @endforeach
