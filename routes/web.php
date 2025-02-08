@@ -14,6 +14,7 @@ use App\Http\Controllers\ParentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClassSubjectController;
 use App\Http\Controllers\ExaminationsController;
@@ -149,6 +150,7 @@ Route::middleware(StudentMiddleware::class)->group(function () {
     Route::post('student/account', [UserController::class, 'update_my_account_student']);
 
     Route::get('student/my_subject', [SubjectController::class, 'my_subject']);
+    Route::get('student/my_calendar', [CalendarController::class, 'my_calendar']);
     Route::get('student/my_timetable', [ClassTimetableController::class, 'my_timetable_student']);
     Route::get('student/my_exam_timetable', [ExaminationsController::class, 'my_exam_timetable_student']);
 
