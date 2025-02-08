@@ -1,6 +1,11 @@
 @extends('layouts.app')
-    @section('style')
-    @endsection
+@section('style')
+<style>
+    .fc-daygrid-event {
+    white-space: normal;
+    }
+</style>
+@endsection
 @section('content')
 <main class="app-main">
     <div class="app-content-header">
@@ -40,6 +45,18 @@
         @endforeach
     @endforeach
 
+    @foreach($getExamTimeTable as $valueE)
+        @foreach($valueE['exam'] as $exam)
+            events.push({
+                    title: '{{ $valueE['name'] }} - {{ $exam['subject_name'] }} ({{ date('H:i A', strtotime($exam['start_time'])) }} to {{ date('H:i A', strtotime($exam['end_time'])) }})',
+                    start: '{{ $exam['exam_date'] }}',
+                    end: '{{ $exam['exam_date'] }}',
+                    color: '#cf0f0fbf',
+                    url: '{{ url('student/my_exam_timetable') }}',
+                });
+        @endforeach
+    @endforeach
+
     var calendarID = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarID, {
         headerToolbar: {
@@ -51,7 +68,7 @@
         navLinks: true,
         editable: false,
         events: events,
-        initialView: 'timeGridWeek',
+        // initialView: 'timeGridWeek',
     });
 
     calendar.render();

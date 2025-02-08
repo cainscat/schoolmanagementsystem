@@ -180,7 +180,7 @@ class ExaminationsController extends Controller
         $data['getRecord'] = $result;
 
         $data['header_title'] = "My Exam Timetable";
-        return view('teacher.my_exam_timetable', $data);
+        return view('student.my_exam_timetable', $data);
     }
 
     //teacher side
