@@ -150,7 +150,7 @@ Route::middleware(StudentMiddleware::class)->group(function () {
     Route::post('student/account', [UserController::class, 'update_my_account_student']);
 
     Route::get('student/my_subject', [SubjectController::class, 'my_subject']);
-    Route::get('student/my_calendar', [CalendarController::class, 'my_calendar']);
+    Route::get('student/my_calendar', [CalendarController::class, 'my_calendar_student']);
     Route::get('student/my_timetable', [ClassTimetableController::class, 'my_timetable_student']);
     Route::get('student/my_exam_timetable', [ExaminationsController::class, 'my_exam_timetable_student']);
 
@@ -169,5 +169,6 @@ Route::middleware(ParentMiddleware::class)->group(function () {
 
     Route::get('parent/my_student/subject/class_timetable/{class_id}/{subject_id}/{student_id}', [ClassTimetableController::class, 'my_timetable_parent']);
     Route::get('parent/my_student/exam_timetable/{student_id}', [ExaminationsController::class, 'my_exam_timetable_parent']);
+    Route::get('parent/my_student/calendar/{student_id}', [CalendarController::class, 'my_calendar_parent']);
 
 });

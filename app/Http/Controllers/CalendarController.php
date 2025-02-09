@@ -1,21 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth;
-
-use App\Models\WeekModel;
 use Illuminate\Http\Request;
+
+use Auth;
+use App\Models\WeekModel;
 use App\Models\ClassSubjectModel;
 use App\Models\ExamScheduleModel;
 use App\Models\ClassSubjectTimetableModel;
+use App\Models\User;
 
 class CalendarController extends Controller
 {
-    public function my_calendar()
+    public function my_calendar_student()
     {
-        //Timetable
         $data['getMyTimeTable'] = $this->get_timetable(Auth::user()->class_id);
-
         $data['getExamTimeTable'] = $this->get_exam_timetable(Auth::user()->class_id);
         // dd($data['getExamTimeTable']);
 
@@ -82,6 +81,19 @@ class CalendarController extends Controller
         }
 
         return $result;
+    }
+
+    //Parent Calendar
+    public function my_calendar_parent($student_id)
+    {
+        $getStudent = User::getSingle($student_id);
+        $data['getMyTimeTable'] = $this->get_timetable($getStudent->class_id);
+        $data['getExamTimeTable'] = $this->get_exam_timetable($getStudent->class_id);
+
+        $data['getStudent'] = $getStudent;
+
+        $data['header_title'] = "Student Calendar";
+        return view('parent.my_calendar', $data);
     }
 
 }
