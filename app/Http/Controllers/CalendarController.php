@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-
 use Auth;
+
+use App\Models\User;
 use App\Models\WeekModel;
+use Illuminate\Http\Request;
 use App\Models\ClassSubjectModel;
 use App\Models\ExamScheduleModel;
+use App\Models\AssignClassTeacherModel;
 use App\Models\ClassSubjectTimetableModel;
-use App\Models\User;
 
 class CalendarController extends Controller
 {
@@ -83,7 +84,7 @@ class CalendarController extends Controller
         return $result;
     }
 
-    //Parent Calendar
+    //Parent Side
     public function my_calendar_parent($student_id)
     {
         $getStudent = User::getSingle($student_id);
@@ -94,6 +95,18 @@ class CalendarController extends Controller
 
         $data['header_title'] = "Student Calendar";
         return view('parent.my_calendar', $data);
+    }
+
+    //Teacher Side
+    public function my_calendar_teacher()
+    {
+        $teacher_id = Auth::user()->id;
+
+        $data['getClassTimeTable'] = AssignClassTeacherModel::getCalendarTeacher($teacher_id);
+
+
+        $data['header_title'] = "My Calendar";
+        return view('teacher.my_calendar', $data);
     }
 
 }

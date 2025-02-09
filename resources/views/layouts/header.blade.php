@@ -308,6 +308,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ url('teacher/my_calendar') }}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>My Calendar</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ url('teacher/my_student') }}" class="nav-link @if(Request::segment(2) == 'my_student') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>My Student</p>
