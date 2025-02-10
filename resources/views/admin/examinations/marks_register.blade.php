@@ -76,40 +76,56 @@
                                     <tbody>
                                         @if(!empty($getStudent) && !empty($getStudent->count()))
                                             @foreach ($getStudent as $student)
+                                            <form action="" method="POST" class="SubmitForm">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="student_id" value="{{ $student->id }}">
+                                                <input type="hidden" name="exam_id" value="{{ Request::get('exam_id') }}">
+                                                <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
                                                 <tr class="align-middle">
                                                     <td style="min-width: 150px;">
                                                         {{ $student->name }} {{ $student->last_name }}
                                                     </td>
+                                                    @php
+                                                        $i = 1;
+                                                    @endphp
                                                     @foreach($getSubject as $subject)
+                                                        @php
+                                                            $getMark = $subject->getMark($student->id,Request::get('exam_id'),Request::get('class_id'), $subject->subject_id);
+                                                        @endphp
                                                         <td>
                                                             <div style="display: flex;">
                                                                 <div>
                                                                     <div style="margin-bottom: 10px; margin-right: 10px;">
                                                                         Class Work
-                                                                        <input style="width: 105px;" type="text" class="form-control" placeholder="Enter Marks">
+                                                                        <input style="width: 105px;" name="mark[{{ $i }}][subject_id]" type="hidden" value="{{ $subject->subject_id }}">
+                                                                        <input style="width: 105px;" name="mark[{{ $i }}][class_work]" value="{{ !empty($getMark->class_work) ? $getMark->class_work : '' }}" type="text" class="form-control" placeholder="Enter Marks">
                                                                     </div>
                                                                     <div style="margin-bottom: 10px;">
                                                                         Home Work
-                                                                        <input style="width: 105px;" type="text" class="form-control" placeholder="Enter Marks">
+                                                                        <input style="width: 105px;" name="mark[{{ $i }}][home_work]" value="{{ !empty($getMark->home_work) ? $getMark->home_work : '' }}" type="text" class="form-control" placeholder="Enter Marks">
                                                                     </div>
                                                                 </div>
                                                                 <div>
                                                                     <div style="margin-bottom: 10px; margin-right: 10px;">
                                                                         Test Work
-                                                                        <input style="width: 105px;" type="text" class="form-control" placeholder="Enter Marks">
+                                                                        <input style="width: 105px;" name="mark[{{ $i }}][test_work]" value="{{ !empty($getMark->test_work) ? $getMark->test_work : '' }}" type="text" class="form-control" placeholder="Enter Marks">
                                                                     </div>
                                                                     <div>
                                                                         Exam
-                                                                        <input style="width: 105px;" type="text" class="form-control" placeholder="Enter Marks">
+                                                                        <input style="width: 105px;" name="mark[{{ $i }}][exam]" value="{{ !empty($getMark->exam) ? $getMark->exam : '' }}" type="text" class="form-control" placeholder="Enter Marks">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </td>
+                                                        @php
+                                                            $i++;
+                                                        @endphp
                                                     @endforeach
                                                     <td>
-                                                        <button type="button" class="btn btn-primary">Save</button>
+                                                        <button type="submit" class="btn btn-primary">Save</button>
                                                     </td>
                                                 </tr>
+                                            </form>
                                             @endforeach
                                         @endif
                                     </tbody>
@@ -126,5 +142,18 @@
 @endsection
 
 @section('script')
-
+<script>
+    $('.SubmitForm').submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "{{ url('admin/examinations/submit_marks_register') }}",
+            data : $(this).serialize(),
+            dataType: "json",
+            success: function(data) {
+                alert(data.message);
+            }
+        });
+    })
+</script>
 @endsection
