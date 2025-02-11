@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Edit Assign Subject</h3>
+                    <h3 class="mb-0">Edit Assign Class</h3>
                 </div>
             </div>
         </div>

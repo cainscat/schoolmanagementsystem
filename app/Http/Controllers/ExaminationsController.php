@@ -344,6 +344,22 @@ class ExaminationsController extends Controller
         return view('teacher.my_exam_timetable', $data);
     }
 
+    public function marks_register_teacher(Request $request)
+    {
+        $data['getClass'] = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
+        $data['getExam'] = ExamScheduleModel::getExamTeacher(Auth::user()->id);
+
+        if(!empty($request->get('exam_id')) && !empty($request->get('class_id')))
+        {
+            $data['getSubject'] = ExamScheduleModel::getSubject($request->get('exam_id'), $request->get('class_id'));
+            $data['getStudent'] = User::getStudentClass($request->get('class_id'));
+        }
+
+        $data['header_title'] = "Marks Register";
+        return view('teacher.marks_register', $data);
+    }
+
+    //parent side
     public function my_exam_timetable_parent($student_id)
     {
         $getStudent = User::getSingle($student_id);
@@ -376,5 +392,7 @@ class ExaminationsController extends Controller
         $data['header_title'] = "Student Exam Timetable";
         return view('parent.exam_timetable', $data);
     }
+
+
 
 }

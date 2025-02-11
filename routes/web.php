@@ -144,6 +144,10 @@ Route::middleware(TeacherMiddleware::class)->group(function () {
     Route::get('teacher/my_class_subject/class_timetable/{class_id}/{subject_id}', [ClassTimetableController::class, 'my_timetable_teacher']);
     Route::get('teacher/my_exam_timetable', [ExaminationsController::class, 'my_exam_timetable_teacher']);
 
+    Route::get('teacher/marks_register', [ExaminationsController::class, 'marks_register_teacher']);
+    Route::post('teacher/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']);
+    Route::post('teacher/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
+
 });
 
 Route::middleware(StudentMiddleware::class)->group(function () {
