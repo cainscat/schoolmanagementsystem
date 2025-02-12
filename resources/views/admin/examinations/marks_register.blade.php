@@ -110,9 +110,12 @@
                                                                 <div>
                                                                     <div style="margin-bottom: 10px; margin-right: 10px;">
                                                                         Class Work
-                                                                        <input style="width: 105px;" name="mark[{{ $i }}][id]" type="hidden" value="{{ $subject->id }}">
-                                                                        <input style="width: 105px;" name="mark[{{ $i }}][subject_id]" type="hidden" value="{{ $subject->subject_id }}">
-                                                                        <input style="width: 105px;" name="mark[{{ $i }}][class_work]" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" value="{{ !empty($getMark->class_work) ? $getMark->class_work : '' }}" type="text" class="form-control" placeholder="Enter Marks">
+
+                                                                        <input name="mark[{{ $i }}][full_marks]" type="hidden" value="{{ $subject->full_marks }}">
+                                                                        <input name="mark[{{ $i }}][passing_marks]" type="hidden" value="{{ $subject->passing_marks }}">
+                                                                        <input name="mark[{{ $i }}][id]" type="hidden" value="{{ $subject->id }}">
+                                                                        <input name="mark[{{ $i }}][subject_id]" type="hidden" value="{{ $subject->subject_id }}">
+                                                                        <input name="mark[{{ $i }}][class_work]" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" value="{{ !empty($getMark->class_work) ? $getMark->class_work : '' }}" type="text" class="form-control" placeholder="Enter Marks">
                                                                     </div>
                                                                     <div style="margin-bottom: 10px;">
                                                                         Home Work
@@ -156,7 +159,7 @@
                                                             $i++;
                                                         @endphp
                                                     @endforeach
-                                                    <td>
+                                                    <td style="min-width: 110px;">
                                                         <button type="submit" class="btn btn-primary">Save All</button>
                                                         {{-- @if(!empty($totalStudentMark))
                                                             <br>
