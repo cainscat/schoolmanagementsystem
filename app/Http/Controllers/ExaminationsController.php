@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\Models\User;
 use App\Models\ExamModel;
 use App\Models\ClassModel;
@@ -10,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\ClassSubjectModel;
 use App\Models\ExamScheduleModel;
 use App\Models\MarksRegisterModel;
+use Auth;
 use App\Models\AssignClassTeacherModel;
 
 class ExaminationsController extends Controller
@@ -432,6 +432,38 @@ class ExaminationsController extends Controller
         return view('parent.exam_timetable', $data);
     }
 
+    public function parent_my_exam_result($student_id)
+    {
+        $data['getStudent'] = User::getSingle($student_id);
+        $result = array();
+        $getExam = MarksRegisterModel::getExam($student_id);
+        foreach($getExam as $value)
+        {
+            $dataE = array();
+            $dataE['exam_name'] = $value->exam_name;
+            $getExamSubject = MarksRegisterModel::getExamSubject($value->exam_id, $student_id);
+            $dataSubject = array();
+            foreach($getExamSubject as $exam)
+            {
+                $totalScore = $exam['class_work'] + $exam['home_work'] + $exam['test_work'] + $exam['exam'];
+                $dataS = array();
+                $dataS['subject_name'] = $exam['subject_name'];
+                $dataS['class_work'] = $exam['class_work'];
+                $dataS['home_work'] = $exam['home_work'];
+                $dataS['test_work'] = $exam['test_work'];
+                $dataS['exam'] = $exam['exam'];
+                $dataS['total_score'] = $totalScore;
+                $dataS['full_marks'] = $exam['full_marks'];
+                $dataS['passing_marks'] = $exam['passing_marks'];
+                $dataSubject[] = $dataS;
+            }
+            $dataE['subject'] = $dataSubject;
+            $result[] = $dataE;
+        }
+        $data['getRecord'] = $result;
 
+        $data['header_title'] = "My Exam Result";
+        return view('parent.my_exam_result', $data);
+    }
 
 }
