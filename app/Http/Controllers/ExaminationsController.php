@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Models\User;
 use App\Models\ExamModel;
 use App\Models\ClassModel;
 use Illuminate\Http\Request;
+use App\Models\MarksGradeModel;
 use App\Models\ClassSubjectModel;
 use App\Models\ExamScheduleModel;
 use App\Models\MarksRegisterModel;
-use Auth;
 use App\Models\AssignClassTeacherModel;
 
 class ExaminationsController extends Controller
@@ -60,7 +61,6 @@ class ExaminationsController extends Controller
         $exam->save();
 
         return redirect('admin/examinations/exam/list')->with('success', "Exam successfully updated");
-
     }
 
     public function exam_delete($id)
@@ -130,7 +130,7 @@ class ExaminationsController extends Controller
             foreach($request->schedule as $schedule)
             {
                 if(!empty($schedule['subject_id']) && !empty($schedule['exam_date']) && !empty($schedule['start_time']) && !empty($schedule['end_time'])
-                && !empty($schedule['room_number']) && !empty($schedule['full_marks']) && !empty($schedule['passing_marks']))
+                    && !empty($schedule['room_number']) && !empty($schedule['full_marks']) && !empty($schedule['passing_marks']))
                 {
                     $exam = new ExamScheduleModel;
                     $exam->exam_id = $request->exam_id;
@@ -270,6 +270,59 @@ class ExaminationsController extends Controller
 
         echo json_encode($json);
     }
+
+    public function marks_grade()
+    {
+        $data['getRecord'] = MarksGradeModel::getRecord();
+        $data['header_title'] = "Marks Grade";
+        return view('admin.examinations.marks_grade.list', $data);
+    }
+
+    public function marks_grade_add()
+    {
+        $data['header_title'] = "Add Marks Grade";
+        return view('admin.examinations.marks_grade.add', $data);
+    }
+
+    public function marks_grade_insert(Request $request)
+    {
+        $mark = new MarksGradeModel;
+        $mark->name = trim($request->name);
+        $mark->percent_from = trim($request->percent_from);
+        $mark->percent_to = trim($request->percent_to);
+        $mark->created_by = Auth::user()->id;
+        $mark->save();
+
+        return redirect('admin/examinations/marks_grade')->with('success', "Marks Grade successfully created");
+    }
+
+    public function marks_grade_edit($id)
+    {
+        $data['getRecord'] = MarksGradeModel::getSingle($id);
+        $data['header_title'] = "Edit Marks Grade";
+        return view('admin.examinations.marks_grade.edit', $data);
+    }
+
+    public function marks_grade_update($id, Request $request)
+    {
+        $mark = MarksGradeModel::getSingle($id);
+        $mark->name = trim($request->name);
+        $mark->percent_from = trim($request->percent_from);
+        $mark->percent_to = trim($request->percent_to);
+        $mark->save();
+
+        return redirect('admin/examinations/marks_grade')->with('success', "Marks Grade successfully updated");
+
+    }
+
+    public function marks_grade_delete($id)
+    {
+        $mark = MarksGradeModel::getSingle($id);
+        $mark->delete();
+
+        return redirect('admin/examinations/marks_grade')->with('success', "Marks Grade successfully deleted");
+    }
+
 
 
     //student side
@@ -465,5 +518,4 @@ class ExaminationsController extends Controller
         $data['header_title'] = "My Exam Result";
         return view('parent.my_exam_result', $data);
     }
-
 }
