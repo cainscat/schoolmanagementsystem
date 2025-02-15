@@ -1,21 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\AdminMiddleware;
-use App\Http\Middleware\ParentMiddleware;
-use App\Http\Middleware\TeacherMiddleware;
-use App\Http\Middleware\StudentMiddleware;
-
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminController;
+
 use App\Http\Controllers\ClassController;
+use App\Http\Middleware\ParentMiddleware;
 use App\Http\Controllers\ParentController;
-use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\SubjectController;
+use App\Http\Middleware\StudentMiddleware;
+use App\Http\Middleware\TeacherMiddleware;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ClassSubjectController;
 use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\ClassTimetableController;
@@ -133,6 +134,9 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('admin/examinations/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_edit']);
     Route::post('admin/examinations/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_update']);
     Route::get('admin/examinations/marks_grade/delete/{id}', [ExaminationsController::class, 'marks_grade_delete']);
+
+    Route::get('admin/attendance/student', [AttendanceController::class, 'attendance_student']);
+    Route::post('admin/attendance/student/save', [AttendanceController::class, 'attendance_student_submit']);
 
 });
 
