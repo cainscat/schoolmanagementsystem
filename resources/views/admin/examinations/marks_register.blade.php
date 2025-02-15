@@ -140,7 +140,7 @@
                                                                 </button>
                                                             </div>
 
-                                                            @if(!empty($getMark))
+                                                            {{-- @if(!empty($getMark))
                                                                 <div>
                                                                     <b>Total Mark: </b>{{ $totalMark }} <br>
                                                                     <b>Passing Mark: </b>{{ $subject->passing_marks }} <br>
@@ -159,7 +159,7 @@
                                                                         @endphp
                                                                     @endif
                                                                 </div>
-                                                            @endif
+                                                            @endif --}}
                                                         </td>
                                                         @php
                                                             $i++;
@@ -167,7 +167,7 @@
                                                     @endforeach
                                                     <td style="width: 150px;">
                                                         <button type="submit" class="btn btn-primary">Save All</button>
-                                                        @if(!empty($totalStudentMark))
+                                                        {{-- @if(!empty($totalStudentMark))
                                                             <br>
                                                             <b>Total Student Mark:</b> {{ $totalStudentMark }}
                                                             <br>
@@ -190,7 +190,7 @@
                                                             @else
                                                             <b>Result: </b><span style="color: red; font-weight: bold;">Fail</span>
                                                             @endif
-                                                        @endif
+                                                        @endif --}}
                                                     </td>
                                                 </tr>
                                             </form>

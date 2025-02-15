@@ -75,11 +75,18 @@
                                             </tr>
                                         @endforeach
                                             <tr>
-                                                <td colspan="3">
+                                                <td colspan="2">
                                                     <b>Grand Total: {{ $totalScore }}/{{ $fullMarks }}</b>
                                                 </td>
-                                                <td colspan="5">
-                                                    <b>Percentage: {{ round(($totalScore * 100) /  $fullMarks,2)}}%</b>
+                                                <td colspan="3">
+                                                    @php
+                                                        $percentage = ($totalScore * 100) /  $fullMarks;
+                                                        $getGrade = App\Models\MarksGradeModel::getGrade($percentage);
+                                                    @endphp
+                                                    <b>Percentage: {{ round($percentage,2)}}%</b>
+                                                </td>
+                                                <td colspan="3">
+                                                    <b>Grade: {{ $getGrade }}</b>
                                                 </td>
                                                 <td colspan="1">
                                                     <b>Result:</b>
