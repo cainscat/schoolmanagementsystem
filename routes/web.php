@@ -180,6 +180,8 @@ Route::middleware(StudentMiddleware::class)->group(function () {
     Route::get('student/my_exam_timetable', [ExaminationsController::class, 'my_exam_timetable_student']);
     Route::get('student/my_exam_result', [ExaminationsController::class, 'my_exam_result']);
 
+    Route::get('student/my_attendance', [AttendanceController::class, 'my_attendance_student']);
+
 });
 
 Route::middleware(ParentMiddleware::class)->group(function () {
