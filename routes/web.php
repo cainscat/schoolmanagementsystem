@@ -137,6 +137,7 @@ Route::middleware(AdminMiddleware::class)->group(function () {
 
     Route::get('admin/attendance/student', [AttendanceController::class, 'attendance_student']);
     Route::post('admin/attendance/student/save', [AttendanceController::class, 'attendance_student_submit']);
+    Route::get('admin/attendance/report', [AttendanceController::class, 'attendance_report']);
 
 });
 
