@@ -30,18 +30,18 @@
                                         <th style="min-width: 100px;">Student Name</th>
                                         <th>Gender</th>
                                         <th style="min-width: 100px;">Date of Birth</th>
-                                        <th>Height</th>
+                                        {{-- <th>Height</th>
                                         <th>Weight</th>
                                         <th>Blood Group</th>
-                                        <th>Religion</th>
+                                        <th>Religion</th> --}}
                                         <th>Class</th>
-                                        <th>Admission Number</th>
+                                        {{-- <th>Admission Number</th> --}}
                                         <th style="min-width: 100px;">Admission Date</th>
                                         <th>Mobile Number</th>
                                         <th>Email</th>
-                                        <th>Roll Number</th>
-                                        <th>Caste</th>
-                                        <th style="min-width: 100px;">Created Date</th>
+                                        {{-- <th>Roll Number</th>
+                                        <th>Caste</th> --}}
+                                        {{-- <th style="min-width: 100px;">Created Date</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -60,12 +60,12 @@
                                                     {{ date('d-m-Y', strtotime($value->date_of_birth)) }}
                                                 @endif
                                             </td>
-                                            <td>{{ $value->height }}</td>
+                                            {{-- <td>{{ $value->height }}</td>
                                             <td>{{ $value->weight }}</td>
                                             <td>{{ $value->blood_group }}</td>
-                                            <td>{{ $value->religion }}</td>
+                                            <td>{{ $value->religion }}</td> --}}
                                             <td>{{ $value->class_name }}</td>
-                                            <td>{{ $value->admission_number }}</td>
+                                            {{-- <td>{{ $value->admission_number }}</td> --}}
                                             <td>
                                                 @if(!empty($value->date_of_birth))
                                                     {{ date('d-m-Y', strtotime($value->admission_date)) }}
@@ -73,14 +73,15 @@
                                             </td>
                                             <td>{{ $value->mobile_number }}</td>
                                             <td>{{ $value->email }}</td>
-                                            <td>{{ $value->roll_number }}</td>
-                                            <td>{{ $value->caste }}</td>
-                                            <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>
+                                            {{-- <td>{{ $value->roll_number }}</td>
+                                            <td>{{ $value->caste }}</td> --}}
+                                            {{-- <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td> --}}
                                             <td style="min-width: 250px;">
                                                 <a class="btn btn-success btn-sm" href="{{ url('parent/my_student/subject/'.$value->id) }}">Subject</a>
                                                 <a class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_timetable/'.$value->id) }}">Exam Timetable</a>
                                                 <a class="btn btn-warning btn-sm mt-2" href="{{ url('parent/my_student/calendar/'.$value->id) }}">Calendar</a>
                                                 <a class="btn btn-warning btn-sm mt-2" href="{{ url('parent/my_student/exam_result/'.$value->id) }}">Exam Result</a>
+                                                <a class="btn btn-primary btn-sm mt-2" href="{{ url('parent/my_student/attendance/'.$value->id) }}">Attendance</a>
                                             </td>
                                         </tr>
                                     @endforeach

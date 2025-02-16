@@ -7,7 +7,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h3 class="mb-0">Attendance Report (Total: {{ $getRecord->total() }})</h3>
+                <h3 class="mb-0">
+                    <span style="color: blue;">{{ $getStudent->name }} {{ $getStudent->last_name }}'s</span>
+                    Attendance (Total: {{ $getRecord->total() }})
+                </h3>
             </div>
         </div>
     </div>
@@ -16,7 +19,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                @include('_message')
+
                 <div class="card card-primary">
                     <form action="" method="get">
                         <div class="card-header">
@@ -26,21 +29,11 @@
                             <div class="row">
 
                                 <div class="form-group col-md-2">
-                                    <label>Student ID</label>
-                                    <input type="text" name="student_id" value="{{ Request::get('student_id') }}" class="form-control" placeholder="Student ID">
-                                </div>
-
-                                <div class="form-group col-md-2">
-                                    <label>Student Name</label>
-                                    <input type="text" name="student_name" value="{{ Request::get('student_name') }}" class="form-control" placeholder="Student Name">
-                                </div>
-
-                                <div class="form-group col-md-2">
                                     <label>Class</label>
                                     <select name="class_id" class="form-control">
                                         <option value="">Select</option>
                                         @foreach($getClass as $class)
-                                            <option {{ (Request::get('class_id') == $class->id ? 'selected' : '') }} value="{{ $class->id }}">{{ $class->name }}</option>
+                                            <option {{ (Request::get('class_id') == $class->class_id ? 'selected' : '') }} value="{{ $class->class_id }}">{{ $class->class_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -68,7 +61,7 @@
 
                                 <div class="form-group col-md-2">
                                     <button style="margin-top: 23px;" type="submit" class="btn btn-primary">Search</button>
-                                    <a href="{{ url('admin/attendance/report') }}" style="margin-top: 23px;" class="btn btn-success">Reset</a>
+                                    <a href="{{ url('parent/my_student/attendance/'.$getStudent->id) }}" style="margin-top: 23px;" class="btn btn-success">Reset</a>
                                 </div>
 
                             </div>
@@ -78,47 +71,47 @@
 
                 <div class="card mb-4 mt-3">
                     <div class="card-header">
-                        <h3 class="card-title">Attendance List</h3>
+                        <h3 class="card-title">My Attendance</h3>
                     </div>
                     <div class="card-body p-0" style="overflow: auto;">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Student ID</th>
-                                    <th>Student Name</th>
                                     <th>Class Name</th>
                                     <th>Attendance Type</th>
                                     <th>Attendance Date</th>
-                                    <th>Created By</th>
                                     <th>Created Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($getRecord as $value)
-                                    <tr>
-                                        <td>{{ $value->student_id }}</td>
-                                        <td>{{ $value->student_name }} {{ $value->student_last_name }}</td>
-                                        <td>{{ $value->class_name }}</td>
-                                        <td>
-                                            @if($value->attendance_type == 1)
-                                                Present
-                                            @elseif($value->attendance_type ==2)
-                                                Late
-                                            @elseif($value->attendance_type ==3)
-                                                Absent
-                                            @elseif($value->attendance_type ==4)
-                                                Half Day
-                                            @endif
-                                        </td>
-                                        <td>{{ date('d-m-y', strtotime($value->attendance_date)) }}</td>
-                                        <td>{{ $value->created_by_name }}</td>
-                                        <td>{{ date('d-m-y H:i A', strtotime($value->created_at)) }}</td>
-                                    </tr>
-                                @empty
+                                @if(!empty($getRecord))
+                                    @forelse($getRecord as $value)
+                                        <tr>
+                                            <td>{{ $value->class_name }}</td>
+                                            <td>
+                                                @if($value->attendance_type == 1)
+                                                    Present
+                                                @elseif($value->attendance_type ==2)
+                                                    Late
+                                                @elseif($value->attendance_type ==3)
+                                                    Absent
+                                                @elseif($value->attendance_type ==4)
+                                                    Half Day
+                                                @endif
+                                            </td>
+                                            <td>{{ date('d-m-y', strtotime($value->attendance_date)) }}</td>
+                                            <td>{{ date('d-m-y H:i A', strtotime($value->created_at)) }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="100%">Record not found</td>
+                                        </tr>
+                                    @endforelse
+                                @else
                                     <tr>
                                         <td colspan="100%">Record not found</td>
                                     </tr>
-                                @endforelse
+                                @endif
                             </tbody>
                         </table>
                         <div style="margin-top: 5px; float:right;">

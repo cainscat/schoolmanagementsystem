@@ -200,4 +200,6 @@ Route::middleware(ParentMiddleware::class)->group(function () {
     Route::get('parent/my_student/exam_result/{student_id}', [ExaminationsController::class, 'parent_my_exam_result']);
     Route::get('parent/my_student/calendar/{student_id}', [CalendarController::class, 'my_calendar_parent']);
 
+    Route::get('parent/my_student/attendance/{student_id}', [AttendanceController::class, 'my_student_attendance']);
+
 });
