@@ -47,4 +47,43 @@ class CommunicateController extends Controller
         return redirect('admin/communicate/notice_board')->with('success', "New Notice Board successfully created");
     }
 
+    public function edit_notice_board($id)
+    {
+        $data['getRecord'] = NoticeBoardModel::getSingle($id);
+        $data['header_title'] = "Edit Notice Board";
+        return view('admin.communicate.notice_board.edit', $data);
+    }
+
+    public function update_notice_board($id, Request $request)
+    {
+        $save = NoticeBoardModel::getSingle($id);
+        $save->title = trim($request->title);
+        $save->notice_date = trim($request->notice_date);
+        $save->publish_date = trim($request->publish_date);
+        $save->message = trim($request->message);
+        $save->save();
+
+        NoticeBoardMessageModel::deleteRecord($id);
+        if(!empty($request->message_to))
+        {
+            foreach($request->message_to as $message_to)
+            {
+                $message = new NoticeBoardMessageModel;
+                $message->notice_board_id = $save->id;
+                $message->message_to = $message_to;
+                $message->save();
+            }
+        }
+
+        return redirect('admin/communicate/notice_board')->with('success', "Notice Board successfully updated");
+    }
+
+    public function delete_notice_board($id)
+    {
+        $save = NoticeBoardModel::getSingle($id);
+        $save->delete();
+        NoticeBoardMessageModel::deleteRecord($id);
+        return redirect()->back()->with('success', "Notice Board successfully deleted");
+    }
+
 }

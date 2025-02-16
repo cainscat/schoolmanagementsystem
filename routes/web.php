@@ -143,6 +143,10 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('admin/communicate/notice_board', [CommunicateController::class, 'notice_board']);
     Route::get('admin/communicate/notice_board/add', [CommunicateController::class, 'add_notice_board']);
     Route::post('admin/communicate/notice_board/add', [CommunicateController::class, 'insert_notice_board']);
+    Route::get('admin/communicate/notice_board/edit/{id}', [CommunicateController::class, 'edit_notice_board']);
+    Route::post('admin/communicate/notice_board/edit/{id}', [CommunicateController::class, 'update_notice_board']);
+    Route::get('admin/communicate/notice_board/delete/{id}', [CommunicateController::class, 'delete_notice_board']);
+
 
 });
 

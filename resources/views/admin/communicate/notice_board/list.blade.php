@@ -20,37 +20,57 @@
             <div class="row">
                 <div class="col-md-12">
                     @include('layouts._message')
-                    {{-- <div class="card card-primary">
+                    <div class="card card-primary">
                         <form action="" method="get">
                             <div class="card-header">
                                 <h3 class="card-title">Search</h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="form-group col-md-3">
-                                        <label>Name</label>
-                                        <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name" placeholder="Enter Name">
-                                    </div>
-
-                                    <div class="form-group col-md-3">
-                                        <label>Email</label>
-                                        <input type="text" class="form-control" value="{{ Request::get('email') }}" name="email" placeholder="Enter Email">
+                                    <div class="form-group col-md-2">
+                                        <label>Title</label>
+                                        <input type="text" class="form-control" value="{{ Request::get('title') }}" name="title" placeholder="Enter Title">
                                     </div>
 
                                     <div class="form-group col-md-2">
-                                        <label>Date</label>
-                                        <input type="date" class="form-control" value="{{ Request::get('date') }}" name="date">
+                                        <label>Notice Date From</label>
+                                        <input type="date" class="form-control" value="{{ Request::get('notice_date_from') }}" name="notice_date_from">
                                     </div>
 
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-2">
+                                        <label>Notice Date To</label>
+                                        <input type="date" class="form-control" value="{{ Request::get('notice_date_to') }}" name="notice_date_to">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Publish Date From</label>
+                                        <input type="date" class="form-control" value="{{ Request::get('publish_date_from') }}" name="publish_date_from">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Publish Date To</label>
+                                        <input type="date" class="form-control" value="{{ Request::get('publish_date_to') }}" name="publish_date_to">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Message To</label>
+                                        <select name="message_to" class="form-control">
+                                            <option value="">Select</option>
+                                            <option {{ (Request::get('message_to') == 2) ? 'selected' : '' }} value="2">Teacher</option>
+                                            <option {{ (Request::get('message_to') == 3) ? 'selected' : '' }} value="3">Student</option>
+                                            <option {{ (Request::get('message_to') == 4) ? 'selected' : '' }} value="4">Parent</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-2">
                                         <button style="margin-top: 23px;" type="submit" class="btn btn-primary">Search</button>
-                                        <a href="{{ url('admin/admin/list') }}" style="margin-top: 23px;" class="btn btn-success">Reset</a>
+                                        <a href="{{ url('admin/communicate/notice_board') }}" style="margin-top: 23px;" class="btn btn-success">Reset</a>
                                     </div>
 
                                 </div>
                             </div>
                         </form>
-                    </div> --}}
+                    </div>
 
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
