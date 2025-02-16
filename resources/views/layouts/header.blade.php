@@ -309,6 +309,26 @@
                     </ul>
                 </li>
 
+                <li class="nav-item @if(Request::segment(2) == 'communicate') menu-open @endif">
+                    <a href="#" class="nav-link @if(Request::segment(2) == 'communicate') active @endif">
+                      <i class="nav-icon bi bi-table"></i>
+                      <p>
+                        Communicate
+                        <i class="nav-arrow bi bi-chevron-right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="box-sizing: border-box;">
+                        <li class="nav-item">
+                        <a href="{{ url('admin/communicate/notice_board') }}" class="nav-link @if(Request::segment(3) == 'notice_board') active @endif">
+                            <i class="nav-icon bi bi-circle"></i>
+                            <p>Notice Board</p>
+                        </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
                 <li class="nav-item">
                     <a href="{{ url('admin/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
