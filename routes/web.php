@@ -160,6 +160,10 @@ Route::middleware(TeacherMiddleware::class)->group(function () {
     Route::post('teacher/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']);
     Route::post('teacher/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
 
+    Route::get('teacher/attendance/student', [AttendanceController::class, 'teacher_attendance_student']);
+    Route::post('teacher/attendance/student/save', [AttendanceController::class, 'attendance_student_submit']);
+    Route::get('teacher/attendance/report', [AttendanceController::class, 'teacher_attendance_report']);
+
 });
 
 Route::middleware(StudentMiddleware::class)->group(function () {

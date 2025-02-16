@@ -306,7 +306,6 @@
                                 <p>Attendance Report</p>
                             </a>
                         </li>
-
                     </ul>
                 </li>
 
@@ -359,6 +358,31 @@
                         <i class="nav-icon bi bi-speedometer"></i>
                     <p>Marks Register</p>
                     </a>
+                </li>
+
+                <li class="nav-item @if(Request::segment(2) == 'attendance') menu-open @endif">
+                    <a href="#" class="nav-link @if(Request::segment(2) == 'attendance') active @endif">
+                      <i class="nav-icon bi bi-table"></i>
+                      <p>
+                        Attendance
+                        <i class="nav-arrow bi bi-chevron-right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="box-sizing: border-box;">
+                        <li class="nav-item">
+                        <a href="{{ url('teacher/attendance/student') }}" class="nav-link @if(Request::segment(3) == 'student') active @endif">
+                            <i class="nav-icon bi bi-circle"></i>
+                            <p>Student Attendance</p>
+                        </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ url('teacher/attendance/report') }}" class="nav-link @if(Request::segment(3) == 'report') active @endif">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Attendance Report</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="nav-item">
