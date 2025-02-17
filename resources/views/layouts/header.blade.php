@@ -470,11 +470,17 @@
                     </a>
                 </li>
 
-
                 <li class="nav-item">
                     <a href="{{ url('student/my_attendance') }}" class="nav-link @if(Request::segment(2) == 'my_attendance') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>My Attendance</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('student/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>My Notice Board</p>
                     </a>
                 </li>
 

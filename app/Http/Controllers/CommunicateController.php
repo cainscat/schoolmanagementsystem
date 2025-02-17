@@ -86,4 +86,12 @@ class CommunicateController extends Controller
         return redirect()->back()->with('success', "Notice Board successfully deleted");
     }
 
+    //student side
+    public function student_notice_board()
+    {
+        $data['getRecord'] = NoticeBoardModel::getRecordUser(Auth::user()->user_type);
+        $data['header_title'] = "Notice Board";
+        return view('student.my_notice_board', $data);
+    }
+
 }

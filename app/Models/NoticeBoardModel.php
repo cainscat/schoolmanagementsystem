@@ -48,6 +48,30 @@ class NoticeBoardModel extends Model
         return $return;
     }
 
+    static public function getRecordUser($message_to)
+    {
+        $return = self::select('notice_board.*', 'users.name as created_by_name')
+                        ->join('users','users.id','=', 'notice_board.created_by')
+                        ->join('notice_board_message','notice_board_message.notice_board_id','=', 'notice_board.id')
+                        ->where('notice_board_message.message_to', '=', $message_to)
+                        ->where('notice_board.publish_date', '<=', date('Y-m-d'));
+                        if(!empty(Request::get('title')))
+                        {
+                            $return = $return->where('notice_board.title', 'like', '%'.Request::get('title').'%');
+                        }
+                        if(!empty(Request::get('notice_date_from')))
+                        {
+                            $return = $return->where('notice_board.notice_date', '>=', Request::get('notice_date_from'));
+                        }
+                        if(!empty(Request::get('notice_date_to')))
+                        {
+                            $return = $return->where('notice_board.notice_date', '<=', Request::get('notice_date_to'));
+                        }
+        $return = $return->orderBy('notice_board.id', 'desc')
+                    ->paginate(20);
+        return $return;
+    }
+
     public function getMessage()
     {
         return $this->hasMany(NoticeBoardMessageModel::class, 'notice_board_id');

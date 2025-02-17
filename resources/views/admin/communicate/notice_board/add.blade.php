@@ -51,7 +51,7 @@
 
                                 <div class="form-group">
                                     <label>Message</label>
-                                    <textarea id="summernote" name="message" class="form-control editor" placeholder="Message"></textarea>
+                                    <textarea id="summernote" name="message" class="form-control editor" placeholder="Message" style="height: 300px;"></textarea>
                                 </div>
 
                             </div>
