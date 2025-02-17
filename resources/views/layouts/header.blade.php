@@ -515,9 +515,23 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ url('parent/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>Notice Board</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ url('parent/my_student') }}" class="nav-link @if(Request::segment(2) == 'my_student') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>My Student</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('parent/my_student_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_student_notice_board') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>Student Notice Board</p>
                     </a>
                 </li>
 
