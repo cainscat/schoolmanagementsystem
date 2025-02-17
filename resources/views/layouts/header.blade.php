@@ -355,21 +355,21 @@
                 <li class="nav-item">
                     <a href="{{ url('teacher/my_class_subject') }}" class="nav-link @if(Request::segment(2) == 'my_class_subject') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>My Class & Subject</p>
+                        <p>Class & Subject</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('teacher/my_exam_timetable') }}" class="nav-link @if(Request::segment(2) == 'my_exam_timetable') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>My Exam Timetable</p>
+                        <p>Exam Timetable</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('teacher/my_calendar') }}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>My Calendar</p>
+                        <p>Calendar</p>
                     </a>
                 </li>
 
@@ -406,16 +406,23 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ url('teacher/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>Notice Board</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ url('teacher/my_student') }}" class="nav-link @if(Request::segment(2) == 'my_student') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>My Student</p>
+                        <p>Student</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('teacher/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>My Account</p>
+                        <p>Account</p>
                     </a>
                 </li>
 
@@ -438,56 +445,56 @@
                 <li class="nav-item">
                     <a href="{{ url('student/my_calendar') }}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>My Calendar</p>
+                        <p>Calendar</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/my_subject') }}" class="nav-link @if(Request::segment(2) == 'my_subject') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>My Subject</p>
+                        <p>Subject</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/my_timetable') }}" class="nav-link @if(Request::segment(2) == 'my_timetable') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>My Timetable</p>
+                        <p>Timetable</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/my_exam_timetable') }}" class="nav-link @if(Request::segment(2) == 'my_exam_timetable') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>My Exam Timetable</p>
+                        <p>Exam Timetable</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/my_exam_result') }}" class="nav-link @if(Request::segment(2) == 'my_exam_result') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>My Exam Result</p>
+                        <p>Exam Result</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/my_attendance') }}" class="nav-link @if(Request::segment(2) == 'my_attendance') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>My Attendance</p>
+                        <p>Attendance</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>My Notice Board</p>
+                        <p>Notice Board</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
-                        <p>My Account</p>
+                        <p>Account</p>
                     </a>
                 </li>
 

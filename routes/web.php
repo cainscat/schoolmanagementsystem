@@ -173,6 +173,8 @@ Route::middleware(TeacherMiddleware::class)->group(function () {
     Route::post('teacher/attendance/student/save', [AttendanceController::class, 'attendance_student_submit']);
     Route::get('teacher/attendance/report', [AttendanceController::class, 'teacher_attendance_report']);
 
+    Route::get('teacher/my_notice_board', [CommunicateController::class, 'teacher_notice_board']);
+
 });
 
 Route::middleware(StudentMiddleware::class)->group(function () {
