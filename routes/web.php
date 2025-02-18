@@ -147,6 +147,9 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::post('admin/communicate/notice_board/edit/{id}', [CommunicateController::class, 'update_notice_board']);
     Route::get('admin/communicate/notice_board/delete/{id}', [CommunicateController::class, 'delete_notice_board']);
 
+    Route::get('admin/communicate/send_email', [CommunicateController::class, 'send_email']);
+    Route::post('admin/communicate/send_email', [CommunicateController::class, 'send_email_user']);
+    Route::get('admin/communicate/search_user', [CommunicateController::class, 'search_user']);
 
 });
 

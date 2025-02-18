@@ -2,14 +2,71 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Mail;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\SendEmailUserMail;
 use App\Models\NoticeBoardModel;
 use App\Models\NoticeBoardMessageModel;
-use App\Models\User;
-use Auth;
 
 class CommunicateController extends Controller
 {
+    public function send_email()
+    {
+        $data['header_title'] = "Send Email";
+        return view('admin.communicate.send_email', $data);
+    }
+
+    public function search_user(Request $request)
+    {
+        $json = array();
+        if(!empty($request->search))
+        {
+            $getUser = User::searchUser($request->search);
+            foreach($getUser as $value)
+            {
+                $type = '';
+                if($value->user_type == 1)
+                {
+                    $type = 'Admin';
+                }
+                elseif($value->user_type == 2)
+                {
+                    $type = 'Teacher';
+                }
+                elseif($value->user_type == 3)
+                {
+                    $type = 'Student';
+                }
+                elseif($value->user_type == 4)
+                {
+                    $type = 'Parent';
+                }
+
+                $name = $value->name.' '.$value->last_name.' - '.$type;
+                $json[] = ['id'=>$value->id, 'text'=>$name];
+            }
+        }
+
+        echo json_encode($json);
+    }
+
+    public function send_email_user(Request $request)
+    {
+        if(!empty($request->user_id))
+        {
+            $user = User::getSingle($request->user_id);
+            $user->send_message = $request->message;
+            $user->send_subject = $request->subject;
+
+            Mail::to($user->email)->send(new SendEmailUserMail($user));
+        }
+
+        return redirect()->back()->with('success', "Mail successfully send!");
+
+    }
+
     public function notice_board()
     {
         $data['getRecord'] = NoticeBoardModel::getRecord();
