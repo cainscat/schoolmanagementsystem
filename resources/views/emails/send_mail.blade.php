@@ -3,6 +3,6 @@
 
     {!! $user->send_message !!}
 
-    Thanks, <br>
+    Thanks,
     {{ config('app.name') }}
 @endcomponent
