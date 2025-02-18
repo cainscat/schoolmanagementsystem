@@ -345,10 +345,10 @@
                     </a>
                     <ul class="nav nav-treeview" style="box-sizing: border-box;">
                         <li class="nav-item">
-                        <a href="{{ url('admin/homework/homework') }}" class="nav-link @if(Request::segment(3) == 'homework') active @endif">
-                            <i class="nav-icon bi bi-circle"></i>
-                            <p>Homework</p>
-                        </a>
+                            <a href="{{ url('admin/homework/homework') }}" class="nav-link @if(Request::segment(3) == 'homework') active @endif">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Homework</p>
+                            </a>
                         </li>
 
                         {{-- <li class="nav-item">
@@ -357,7 +357,6 @@
                                 <p>Homework Report</p>
                             </a>
                         </li> --}}
-
                     </ul>
                 </li>
 
@@ -385,9 +384,23 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ url('teacher/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>Notice Board</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ url('teacher/my_class_subject') }}" class="nav-link @if(Request::segment(2) == 'my_class_subject') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>Class & Subject</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('teacher/my_student') }}" class="nav-link @if(Request::segment(2) == 'my_student') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>Student</p>
                     </a>
                 </li>
 
@@ -437,18 +450,23 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ url('teacher/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">
-                        <i class="nav-icon bi bi-speedometer"></i>
-                        <p>Notice Board</p>
+                <li class="nav-item @if(Request::segment(2) == 'homework') menu-open @endif">
+                    <a href="#" class="nav-link @if(Request::segment(2) == 'homework') active @endif">
+                      <i class="nav-icon bi bi-table"></i>
+                      <p>
+                        Homework
+                        <i class="nav-arrow bi bi-chevron-right"></i>
+                      </p>
                     </a>
-                </li>
+                    <ul class="nav nav-treeview" style="box-sizing: border-box;">
+                        <li class="nav-item">
+                            <a href="{{ url('teacher/homework/homework') }}" class="nav-link @if(Request::segment(3) == 'homework') active @endif">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Homework</p>
+                            </a>
+                        </li>
 
-                <li class="nav-item">
-                    <a href="{{ url('teacher/my_student') }}" class="nav-link @if(Request::segment(2) == 'my_student') active @endif">
-                        <i class="nav-icon bi bi-speedometer"></i>
-                        <p>Student</p>
-                    </a>
+                    </ul>
                 </li>
 
                 <li class="nav-item">

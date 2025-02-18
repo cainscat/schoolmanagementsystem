@@ -187,6 +187,14 @@ Route::middleware(TeacherMiddleware::class)->group(function () {
 
     Route::get('teacher/my_notice_board', [CommunicateController::class, 'teacher_notice_board']);
 
+    Route::get('teacher/homework/homework', [HomeworkController::class, 'teacher_homework']);
+    Route::get('teacher/homework/homework/add', [HomeworkController::class, 'teacher_add_homework']);
+    Route::post('teacher/homework/homework/add', [HomeworkController::class, 'teacher_insert_homework']);
+    Route::post('teacher/homework/ajax_get_subject', [HomeworkController::class, 'ajax_get_subject']);
+    Route::get('teacher/homework/homework/edit/{id}', [HomeworkController::class, 'teacher_edit_homework']);
+    Route::post('teacher/homework/homework/edit/{id}', [HomeworkController::class, 'teacher_update_homework']);
+    Route::get('teacher/homework/homework/delete/{id}', [HomeworkController::class, 'delete_homework']);
+
 });
 
 Route::middleware(StudentMiddleware::class)->group(function () {
