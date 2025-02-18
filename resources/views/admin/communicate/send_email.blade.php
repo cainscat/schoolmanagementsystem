@@ -35,21 +35,21 @@
                                     <input type="text" class="form-control" required value="{{ old('title') }}" name="subject" placeholder="Subject">
                                 </div>
 
-                                <div class="form-group">
-                                    <label>User (Student / Parent / Teacher)</label>
+                                <div class="form-group mt-2">
+                                    <label>Message to User (Select to single send)</label>
                                     <select name="user_id" class="form-control select2" style="width: 100%;">
                                     <option value="">Select</option>
                                     </select>
                                 </div>
 
-                                <div class="form-group">
-                                    <label style="display: block;">Message To</label>
+                                <div class="form-group mt-2">
+                                    <label style="display: block;">Message to Type (Select to all send)</label>
                                     <label style="margin-right: 10px;"><input type="checkbox" value="3" name="message_to[]">Student</label>
                                     <label style="margin-right: 10px;"><input type="checkbox" value="4" name="message_to[]">Parent</label>
                                     <label><input type="checkbox" value="2" name="message_to[]">Teacher</label>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <label>Message</label>
                                     <textarea id="summernote" name="message" class="form-control editor" placeholder="Message" style="height: 300px;"></textarea>
                                 </div>
