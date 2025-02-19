@@ -212,8 +212,16 @@ Route::middleware(StudentMiddleware::class)->group(function () {
     Route::get('student/my_exam_result', [ExaminationsController::class, 'my_exam_result']);
 
     Route::get('student/my_attendance', [AttendanceController::class, 'my_attendance_student']);
-
     Route::get('student/my_notice_board', [CommunicateController::class, 'student_notice_board']);
+
+    Route::get('student/my_homework', [HomeworkController::class, 'student_homework']);
+    // Route::get('student/my_homework/add', [HomeworkController::class, 'student_add_homework']);
+    // Route::post('student/my_homework/add', [HomeworkController::class, 'student_insert_homework']);
+    // Route::post('student/my_homework/ajax_get_subject', [HomeworkController::class, 'ajax_get_subject']);
+    // Route::get('student/my_homework/edit/{id}', [HomeworkController::class, 'student_edit_homework']);
+    // Route::post('student/my_homework/edit/{id}', [HomeworkController::class, 'student_update_homework']);
+    // Route::get('student/my_homework/delete/{id}', [HomeworkController::class, 'delete_homework']);
+
 
 });
 

@@ -542,6 +542,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ url('student/my_homework') }}" class="nav-link @if(Request::segment(2) == 'my_homework') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>Homework</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ url('student/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>Account</p>
