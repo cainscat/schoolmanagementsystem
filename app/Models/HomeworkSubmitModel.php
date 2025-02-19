@@ -9,6 +9,32 @@ class HomeworkSubmitModel extends Model
 {
     protected $table = 'homework_submit';
 
+    static public function getRecord($homework_id)
+    {
+        $return = HomeworkSubmitModel::select('homework_submit.*', 'users.name as first_name', 'users.last_name as last_name')
+                ->join('users', 'users.id', '=', 'homework_submit.student_id')
+                ->where('homework_submit.homework_id', '=', $homework_id);
+                if(!empty(Request::get('student_name')))
+                {
+                    $student_name = Request::get('student_name');
+                    $return = $return->where(function($query) use ($student_name){
+                        $query->where('users.name', 'like', '%'.$student_name.'%')->orWhere('users.last_name','like','%'.$student_name.'%');
+                    });
+                }
+                if(!empty(Request::get('created_date_from')))
+                {
+                    $return = $return->whereDate('homework_submit.created_at', '>=', Request::get('created_date_from'));
+                }
+                if(!empty(Request::get('created_date_to')))
+                {
+                    $return = $return->whereDate('homework_submit.created_at', '<=', Request::get('created_date_to'));
+                }
+
+        $return = $return->orderBy('homework_submit.id', 'desc')
+                    ->paginate(50);
+        return $return;
+    }
+
     static public function getRecordStudent($student_id)
     {
         $return = HomeworkSubmitModel::select('homework_submit.*', 'class.name as class_name', 'subject.name as subject_name')
@@ -69,6 +95,11 @@ class HomeworkSubmitModel extends Model
     public function getHomework()
     {
         return $this->belongsTo(HomeworkModel::class, 'homework_id');
+    }
+
+    public function getStudent()
+    {
+        return $this->belongsTo(User::class, 'student_id');
     }
 
 }

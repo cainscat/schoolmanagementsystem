@@ -93,7 +93,7 @@ class HomeworkModel extends Model
                 }
                 if(!empty(Request::get('created_date_from')))
                 {
-                    $return = $return->whereDate('homework.created_at', '>=', Request::get('homework_date_from'));
+                    $return = $return->whereDate('homework.created_at', '>=', Request::get('created_date_from'));
                 }
                 if(!empty(Request::get('created_date_to')))
                 {

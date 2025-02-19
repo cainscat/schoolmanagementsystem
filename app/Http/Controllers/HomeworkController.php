@@ -97,6 +97,22 @@ class HomeworkController extends Controller
         return redirect()->back()->with('success', "Homewok successfully deleted");
     }
 
+    public function submitted($homework_id)
+    {
+        $homework = HomeworkModel::getSingle($homework_id);
+        if(!empty($homework))
+        {
+            $data['homework_id'] = $homework_id;
+            $data['getRecord'] = HomeworkSubmitModel::getRecord($homework_id);
+            $data['header_title'] = "Submitted Homework";
+            return view('admin.homework.submitted', $data);
+        }
+        else
+        {
+            abort(404);
+        }
+    }
+
     public function ajax_get_subject(Request $request)
     {
         $class_id = $request->class_id;
@@ -193,6 +209,22 @@ class HomeworkController extends Controller
         $homework->save();
 
         return redirect('teacher/homework/homework')->with('success', "Homewok successfully updated");
+    }
+
+    public function teacher_submitted($homework_id)
+    {
+        $homework = HomeworkModel::getSingle($homework_id);
+        if(!empty($homework))
+        {
+            $data['homework_id'] = $homework_id;
+            $data['getRecord'] = HomeworkSubmitModel::getRecord($homework_id);
+            $data['header_title'] = "Submitted Homework";
+            return view('teacher.homework.submitted', $data);
+        }
+        else
+        {
+            abort(404);
+        }
     }
 
     //student side
