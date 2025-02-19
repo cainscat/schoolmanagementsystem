@@ -108,12 +108,14 @@
                                             <td>{{ $value->created_by_name }}</td>
                                             <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>
                                             <td>
-                                                <a href="" class="btn btn-sm btn-primary">Submit</a>
+                                                <a href="{{ url('student/my_homework/submit_homework/'.$value->id) }}" class="btn btn-sm btn-primary">Submit</a>
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="100%">Record not found!</td>
+                                            <td colspan="100%">
+                                                Have no homework now!
+                                            </td>
                                         </tr>
                                     @endforelse
                                 </tbody>
