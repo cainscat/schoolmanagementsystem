@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3 class="mb-0">Submited Homework</h3>
+                    <h3 class="mb-0">Submitted Homework</h3>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
 
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
-                            <h3 class="card-title">Submited Homework List</h3>
+                            <h3 class="card-title">Submitted Homework List</h3>
                         </div>
                         <div class="card-body p-0">
                             <table class="table table-striped">
@@ -88,9 +88,9 @@
                                         <th>Document</th>
                                         <th>Description</th>
                                         {{-- <th>Created Date</th> --}}
-                                        <th>Submited Document</th>
-                                        <th>Submited Description</th>
-                                        <th>Submited Date</th>
+                                        <th>Submitted Document</th>
+                                        <th>Submitted Description</th>
+                                        <th>Submitted Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
