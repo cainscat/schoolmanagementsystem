@@ -64,7 +64,7 @@
 
                                     <div class="form-group col-md-2">
                                         <button style="margin-top: 23px;" type="submit" class="btn btn-primary">Search</button>
-                                        <a href="{{ url('student/my_submited_homework') }}" style="margin-top: 23px;" class="btn btn-success">Reset</a>
+                                        <a href="{{ url('student/my_submitted_homework') }}" style="margin-top: 23px;" class="btn btn-success">Reset</a>
                                     </div>
 
                                 </div>

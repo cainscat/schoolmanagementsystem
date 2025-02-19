@@ -10,7 +10,7 @@
                     <h3 class="mb-0">Homework</h3>
                 </div>
                 <div class="col-sm-6" style="text-align: right;">
-                    <a href="{{ url('student/my_submited_homework') }}" class="btn btn-success">Submited Homework</a>
+                    <a href="{{ url('student/my_submitted_homework') }}" class="btn btn-success">Submitted Homework</a>
                 </div>
             </div>
         </div>
