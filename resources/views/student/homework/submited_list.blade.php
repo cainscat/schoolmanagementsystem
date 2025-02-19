@@ -6,11 +6,8 @@
     <div class="app-content-header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-6">
-                    <h3 class="mb-0">Homework</h3>
-                </div>
-                <div class="col-sm-6" style="text-align: right;">
-                    <a href="{{ url('student/my_submited_homework') }}" class="btn btn-success">Submited Homework</a>
+                <div class="col-sm-12">
+                    <h3 class="mb-0">Submited Homework</h3>
                 </div>
             </div>
         </div>
@@ -25,6 +22,10 @@
                         <form action="" method="get">
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label>Class</label>
+                                        <input type="text" class="form-control" value="{{ Request::get('class_name') }}" name="class_name" placeholder="Class">
+                                    </div>
 
                                     <div class="form-group col-md-2">
                                         <label>Subject</label>
@@ -52,18 +53,18 @@
                                     </div>
 
                                     <div class="form-group col-md-2">
-                                        <label>Created Date From</label>
-                                        <input type="date" class="form-control" value="{{ Request::get('created_date_from') }}" name="created_date_from">
+                                        <label>Submited Date From</label>
+                                        <input type="date" class="form-control" value="{{ Request::get('submited_date_from') }}" name="submited_date_from">
                                     </div>
 
                                     <div class="form-group col-md-2">
-                                        <label>Created Date To</label>
-                                        <input type="date" class="form-control" value="{{ Request::get('created_date_to') }}" name="created_date_to">
+                                        <label>Submited Date To</label>
+                                        <input type="date" class="form-control" value="{{ Request::get('submited_date_to') }}" name="submited_date_to">
                                     </div>
 
                                     <div class="form-group col-md-2">
                                         <button style="margin-top: 23px;" type="submit" class="btn btn-primary">Search</button>
-                                        <a href="{{ url('student/my_homework') }}" style="margin-top: 23px;" class="btn btn-success">Reset</a>
+                                        <a href="{{ url('student/my_submited_homework') }}" style="margin-top: 23px;" class="btn btn-success">Reset</a>
                                     </div>
 
                                 </div>
@@ -73,7 +74,7 @@
 
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
-                            <h3 class="card-title">Homework List</h3>
+                            <h3 class="card-title">Submited Homework List</h3>
                         </div>
                         <div class="card-body p-0">
                             <table class="table table-striped">
@@ -86,9 +87,10 @@
                                         <th>Submission Date</th>
                                         <th>Document</th>
                                         <th>Description</th>
-                                        <th>Created By</th>
-                                        <th>Created Date</th>
-                                        <th>Action</th>
+                                        {{-- <th>Created Date</th> --}}
+                                        <th>Submited Document</th>
+                                        <th>Submited Description</th>
+                                        <th>Submited Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -97,24 +99,28 @@
                                             <td>{{ $value->id }}</td>
                                             <td>{{ $value->class_name }}</td>
                                             <td>{{ $value->subject_name }}</td>
-                                            <td>{{ date('d-m-Y',strtotime($value->homework_date)) }}</td>
-                                            <td>{{ date('d-m-Y',strtotime($value->submission_date)) }}</td>
+                                            <td>{{ date('d-m-Y',strtotime($value->getHomework->homework_date)) }}</td>
+                                            <td>{{ date('d-m-Y',strtotime($value->getHomework->submission_date)) }}</td>
+                                            <td>
+                                                @if(!empty($value->getHomework->getDocument()))
+                                                    <a href="{{ $value->getHomework->getDocument() }}" class="btn btn-sm btn-success" download="">Download</a>
+                                                @endif
+                                            </td>
+                                            <td>{!! $value->getHomework->description !!}</td>
+                                            {{-- <td>{{ date('d-m-Y H:i A',strtotime($value->getHomework->created_at)) }}</td> --}}
+
                                             <td>
                                                 @if(!empty($value->getDocument()))
                                                     <a href="{{ $value->getDocument() }}" class="btn btn-sm btn-success" download="">Download</a>
                                                 @endif
                                             </td>
                                             <td>{!! $value->description !!}</td>
-                                            <td>{{ $value->created_by_name }}</td>
                                             <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>
-                                            <td>
-                                                <a href="{{ url('student/my_homework/submit_homework/'.$value->id) }}" class="btn btn-sm btn-primary">Submit</a>
-                                            </td>
+
                                         </tr>
                                     @empty
                                         <tr>
                                             <td colspan="100%">
-                                                You finished all of yours! <br>
                                                 Have no homework now!
                                             </td>
                                         </tr>

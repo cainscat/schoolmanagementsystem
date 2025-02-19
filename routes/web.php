@@ -217,6 +217,7 @@ Route::middleware(StudentMiddleware::class)->group(function () {
     Route::get('student/my_homework', [HomeworkController::class, 'student_homework']);
     Route::get('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'student_submit_homework']);
     Route::post('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'student_submit_homework_insert']);
+    Route::get('student/my_submited_homework', [HomeworkController::class, 'student_submited_homework']);
 
 });
 
