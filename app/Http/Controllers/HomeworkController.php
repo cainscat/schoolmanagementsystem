@@ -14,12 +14,12 @@ use App\Models\User;
 
 class HomeworkController extends Controller
 {
-    public function homework()
-    {
-        $data['getRecord'] = HomeworkModel::getRecord();
-        $data['header_title'] = "Homework";
-        return view('admin.homework.list', $data);
-    }
+        public function homework()
+        {
+            $data['getRecord'] = HomeworkModel::getRecord();
+            $data['header_title'] = "Homework";
+            return view('admin.homework.list', $data);
+        }
 
     public function add_homework()
     {
@@ -112,6 +112,13 @@ class HomeworkController extends Controller
         {
             abort(404);
         }
+    }
+
+    public function homework_report()
+    {
+        $data['getRecord'] = HomeworkSubmitModel::getHomeworkReport();
+        $data['header_title'] = "Homework Report";
+        return view('admin.homework.report', $data);
     }
 
     public function ajax_get_subject(Request $request)

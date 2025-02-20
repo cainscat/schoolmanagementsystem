@@ -161,6 +161,8 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('admin/homework/homework/delete/{id}', [HomeworkController::class, 'delete_homework']);
     Route::get('admin/homework/homework/submitted/{id}', [HomeworkController::class, 'submitted']);
 
+    Route::get('admin/homework/homework_report', [HomeworkController::class, 'homework_report']);
+
 });
 
 Route::middleware(TeacherMiddleware::class)->group(function () {

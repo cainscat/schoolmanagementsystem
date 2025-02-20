@@ -351,12 +351,12 @@
                             </a>
                         </li>
 
-                        {{-- <li class="nav-item">
-                            <a href="{{ url('admin/homework/') }}" class="nav-link @if(Request::segment(3) == '') active @endif">
+                        <li class="nav-item">
+                            <a href="{{ url('admin/homework/homework_report') }}" class="nav-link @if(Request::segment(3) == 'homework_report') active @endif">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Homework Report</p>
                             </a>
-                        </li> --}}
+                        </li>
                     </ul>
                 </li>
 
