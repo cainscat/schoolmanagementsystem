@@ -10,6 +10,7 @@ use App\Models\HomeworkModel;
 use App\Models\ClassSubjectModel;
 use App\Models\HomeworkSubmitModel;
 use App\Models\AssignClassTeacherModel;
+use App\Models\User;
 
 class HomeworkController extends Controller
 {
@@ -270,6 +271,25 @@ class HomeworkController extends Controller
         $data['getRecord'] = HomeworkSubmitModel::getRecordStudent(Auth::user()->id);
         $data['header_title'] = "Submitted Homework";
         return view('student.homework.submitted_list', $data);
+    }
+
+    //parent side
+    public function my_student_homework($student_id)
+    {
+        $getStudent = User::getSingle($student_id);
+        $data['getStudent'] = $getStudent;
+        $data['getRecord'] = HomeworkModel::getRecordStudent($getStudent->class_id, $getStudent->id);
+        $data['header_title'] = "Student Homework";
+        return view('parent.homework.list', $data);
+    }
+
+    public function my_student_submitted_homework($student_id)
+    {
+        $getStudent = User::getSingle($student_id);
+        $data['getRecord'] = HomeworkSubmitModel::getRecordStudent($getStudent->id);
+        $data['getStudent'] = $getStudent;
+        $data['header_title'] = "Student Submitted Homework";
+        return view('parent.homework.submitted_list', $data);
     }
 
 }

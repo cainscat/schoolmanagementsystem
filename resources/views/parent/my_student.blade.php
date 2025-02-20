@@ -82,6 +82,7 @@
                                                 <a class="btn btn-warning btn-sm mt-2" href="{{ url('parent/my_student/calendar/'.$value->id) }}">Calendar</a>
                                                 <a class="btn btn-warning btn-sm mt-2" href="{{ url('parent/my_student/exam_result/'.$value->id) }}">Exam Result</a>
                                                 <a class="btn btn-primary btn-sm mt-2" href="{{ url('parent/my_student/attendance/'.$value->id) }}">Attendance</a>
+                                                <a class="btn btn-primary btn-sm mt-2" href="{{ url('parent/my_student/homework/'.$value->id) }}">Homework</a>
                                             </td>
                                         </tr>
                                     @endforeach
