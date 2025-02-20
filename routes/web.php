@@ -21,6 +21,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\ClassSubjectController;
 use App\Http\Controllers\ExaminationsController;
+use App\Http\Controllers\FeesColectionController;
 use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\AssignClassTeacherController;
 
@@ -162,6 +163,9 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('admin/homework/homework/submitted/{id}', [HomeworkController::class, 'submitted']);
 
     Route::get('admin/homework/homework_report', [HomeworkController::class, 'homework_report']);
+
+    Route::get('admin/fees_colection/collect_fees', [FeesColectionController::class, 'collect_fees']);
+    Route::get('admin/fees_colection/collect_fees/add_fees/{student_id}', [FeesColectionController::class, 'add_collect_fees']);
 
 });
 

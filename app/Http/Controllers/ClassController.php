@@ -22,12 +22,9 @@ class ClassController extends Controller
 
     public function insert(Request $request)
     {
-        // request()->validate([
-        //     'name' => 'required|name|unique:class'
-        // ]);
-
         $save = new ClassModel;
         $save->name = trim($request->name);
+        $save->amount = trim($request->amount);
         $save->status = trim($request->status);
         $save->created_by = Auth::user()->id;
         $save->save();
@@ -53,6 +50,7 @@ class ClassController extends Controller
     {
         $save = ClassModel::getSingle($id);
         $save->name = trim($request->name);
+        $save->amount = trim($request->amount);
         $save->status = trim($request->status);
         $save->save();
 

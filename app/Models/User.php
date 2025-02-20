@@ -192,6 +192,35 @@ class User extends Authenticatable
         return $return;
     }
 
+    static public function getCollectFeesStudent()
+    {
+        $return = self::select('users.*', 'class.name as class_name', 'class.amount')
+                    ->join('class', 'class.id', '=', 'users.class_id')
+                    ->where('users.user_type', '=', 3)
+                    ->where('users.is_delete', '=', 0);
+
+                    if(!empty(Request::get('student_id')))
+                    {
+                        $return = $return->where('users.id', '=', Request::get('student_id'));
+                    }
+                    if(!empty(Request::get('student_name')))
+                    {
+                        $student_name = Request::get('student_name');
+                        $return = $return->where(function($query) use ($student_name){
+                            $query->where('users.name', 'like', '%'.$student_name.'%')->orWhere('users.last_name','like','%'.$student_name.'%');
+                        });
+                    }
+                    if(!empty(Request::get('class_id')))
+                    {
+                        $return = $return->where('users.class_id', '=', Request::get('class_id'));
+                    }
+
+        $return = $return->orderBy('users.name', 'desc')
+                    ->paginate(20);
+
+        return $return;
+    }
+
     static public function getParent()
     {
         $return = self::select('users.*')

@@ -58,6 +58,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
+                                        <th>Amount ($)</th>
                                         <th>Status</th>
                                         <th>Created By</th>
                                         <th>Created Date</th>
@@ -69,6 +70,7 @@
                                         <tr class="align-middle">
                                             <td>{{ $value->id }}</td>
                                             <td>{{ $value->name }}</td>
+                                            <td>${{ number_format($value->amount) }}</td>
                                             <td>
                                                 @if($value->status == 0)
                                                     Active

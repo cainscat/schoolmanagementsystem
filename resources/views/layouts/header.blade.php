@@ -243,6 +243,24 @@
                     </ul>
                 </li>
 
+                <li class="nav-item @if(Request::segment(2) == 'fees_colection') menu-open @endif">
+                    <a href="#" class="nav-link @if(Request::segment(2) == 'fees_colection') active @endif">
+                      <i class="nav-icon bi bi-table"></i>
+                      <p>
+                        Fees Colection
+                        <i class="nav-arrow bi bi-chevron-right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="box-sizing: border-box;">
+                        <li class="nav-item">
+                        <a href="{{ url('admin/fees_colection/collect_fees') }}" class="nav-link @if(Request::segment(3) == 'collect_fees') active @endif">
+                            <i class="nav-icon bi bi-circle"></i>
+                            <p>Collect Fees</p>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="nav-item @if(Request::segment(2) == 'examinations') menu-open @endif">
                     <a href="#" class="nav-link @if(Request::segment(2) == 'examinations') active @endif">
                       <i class="nav-icon bi bi-table"></i>

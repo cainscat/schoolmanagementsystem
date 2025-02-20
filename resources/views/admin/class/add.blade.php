@@ -26,6 +26,11 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label>Amount ($)</label>
+                                    <input type="number" class="form-control" required name="amount" placeholder="Amount">
+                                </div>
+
+                                <div class="form-group">
                                     <label>Status</label>
                                     <select class="form-control" name="status">
                                         <option value="0">Active</option>

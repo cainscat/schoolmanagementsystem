@@ -1,0 +1,171 @@
+@extends('layouts.app')
+    @section('style')
+    @endsection
+@section('content')
+<main class="app-main">
+    <div class="app-content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="mb-0">Collect Fees</h3>
+                </div>
+
+                <div class="col-sm-6" style="text-align: right;">
+                    <button type="button" id="AddFees" class="btn btn-primary">Add Fees</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    @include('layouts._message')
+
+                    {{-- <div class="card card-primary">
+                        <form action="" method="get">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-md-2">
+                                        <label>Class</label>
+                                        <select name="class_id" class="form-control">
+                                            <option value="">Select Class</option>
+                                            @foreach($getClass as $class)
+                                                <option {{ (Request::get('class_id') == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Student ID</label>
+                                        <input type="text" class="form-control" value="{{ Request::get('student_id') }}" name="student_id" placeholder="Student ID">
+                                    </div>
+
+                                    <div class="form-group col-md-3">
+                                        <label>Student Name</label>
+                                        <input type="text" class="form-control" value="{{ Request::get('student_name') }}" name="student_name" placeholder="Student Name">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <button style="margin-top: 23px;" type="submit" class="btn btn-primary">Search</button>
+                                        <a href="{{ url('admin/fees_colection/collect_fees') }}" style="margin-top: 23px;" class="btn btn-success">Reset</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div> --}}
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="card-title">Payment Detail</h3>
+                        </div>
+                        <div class="card-body p-0">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <th>Student Name</th>
+                                        <th>Class Name</th>
+                                        <th>Total Amount ($)</th>
+                                        <th>Paid Amount ($)</th>
+                                        <th>Created Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- @if(!empty($getRecord))
+                                        @forelse ($getRecord as $value)
+                                            <tr class="align-middle">
+                                                <td>{{ $value->id }}</td>
+                                                <td>{{ $value->name }} {{ $value->last_name }}</td>
+                                                <td>{{ $value->class_name }}</td>
+                                                <td>${{ number_format($value->amount) }}</td>
+                                                <td>$0</td>
+                                                <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>
+                                                <td>
+                                                    <a href="{{ url('admin/fees_colection/collect_fees/add_fees'.$value->id) }}" class="btn btn-sm btn-success">Collect Fees</a>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="100%">Record not found!</td>
+                                            </tr>
+                                        @endforelse
+                                    @else
+                                        <tr>
+                                            <td colspan="100%">Record not found!</td>
+                                        </tr>
+                                    @endif --}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="modal fade" id="AddFeesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Fees</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+                <label class="col-form-label">Total Amount: </label>
+
+            </div>
+
+            <div class="mb-3">
+                <label class="col-form-label">Paid Amount: </label>
+
+            </div>
+
+            <div class="mb-3">
+                <label class="col-form-label">Remaning Amount: </label>
+
+            </div>
+
+            <div class="mb-3">
+              <label class="col-form-label">Amount:</label>
+              <input type="number" class="form-control" name="amount">
+            </div>
+
+            <div class="mb-3">
+                <label class="col-form-label">Payment Type</label>
+                <select name="payment_type" class="form-control" required>
+                    <option value="">Select</option>
+                    <option value="cash">Cash</option>
+                    <option value="cheque">Cheque</option>
+                </select>
+              </div>
+
+            <div class="mb-3">
+              <label class="col-form-label">Remark:</label>
+              <textarea class="form-control" name="remark"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+@endsection
+
+@section('script')
+<script>
+    $('#AddFees').click(function() {
+        $('#AddFeesModal').modal('show');
+    });
+</script>
+@endsection
