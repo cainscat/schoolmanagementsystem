@@ -52,6 +52,14 @@ class User extends Authenticatable
         return self::find($id);
     }
 
+    static public function getSingleClass($id)
+    {
+        return self::select('users.*', 'class.amount', 'class.name as class_name')
+                    ->join('class', 'class.id', '=', 'users.class_id')
+                    ->where('users.id', '=', $id)
+                    ->first();
+    }
+
     static public function searchUser($search)
     {
         $return = self::select('users.*')
@@ -219,6 +227,11 @@ class User extends Authenticatable
                     ->paginate(20);
 
         return $return;
+    }
+
+    static public function getPaidAmount($student_id, $class_id)
+    {
+        return StudentAddFeesModel::getPaidAmount($student_id, $class_id);
     }
 
     static public function getParent()

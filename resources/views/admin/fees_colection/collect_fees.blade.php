@@ -66,6 +66,7 @@
                                         <th>Class Name</th>
                                         <th>Total Amount ($)</th>
                                         <th>Paid Amount ($)</th>
+                                        <th>Remaning Amount ($)</th>
                                         <th>Created Date</th>
                                         <th>Action</th>
                                     </tr>
@@ -73,12 +74,17 @@
                                 <tbody>
                                     @if(!empty($getRecord))
                                         @forelse ($getRecord as $value)
+                                            @php
+                                                $paidAmount = $value->getPaidAmount($value->id, $value->class_id);
+                                                $remaningAmount = $value->amount - $paidAmount;
+                                            @endphp
                                             <tr class="align-middle">
                                                 <td>{{ $value->id }}</td>
                                                 <td>{{ $value->name }} {{ $value->last_name }}</td>
                                                 <td>{{ $value->class_name }}</td>
                                                 <td>${{ number_format($value->amount) }}</td>
-                                                <td>$0</td>
+                                                <td>${{ number_format($paidAmount) }}</td>
+                                                <td>${{ number_format($remaningAmount) }}</td>
                                                 <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>
                                                 <td>
                                                     <a href="{{ url('admin/fees_colection/collect_fees/add_fees/'.$value->id) }}" class="btn btn-sm btn-success">Collect Fees</a>

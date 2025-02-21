@@ -7,7 +7,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Collect Fees</h3>
+                    <h3 class="mb-0">
+                        Collect Fees
+                        <span style="color: blue;">{{ $getStudent->name }} {{ $getStudent->last_name }}</span>
+                    </h3>
                 </div>
 
                 <div class="col-sm-6" style="text-align: right;">
@@ -65,24 +68,28 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Student ID</th>
-                                        <th>Student Name</th>
                                         <th>Class Name</th>
                                         <th>Total Amount ($)</th>
                                         <th>Paid Amount ($)</th>
+                                        <th>Remaning Amount ($)</th>
+                                        <th>Payment Type</th>
+                                        <th>Remark</th>
+                                        <th>Created By</th>
                                         <th>Created Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @if(!empty($getRecord))
-                                        @forelse ($getRecord as $value)
+                                    @if(!empty($getFees))
+                                        @forelse ($getFees as $value)
                                             <tr class="align-middle">
-                                                <td>{{ $value->id }}</td>
-                                                <td>{{ $value->name }} {{ $value->last_name }}</td>
                                                 <td>{{ $value->class_name }}</td>
-                                                <td>${{ number_format($value->amount) }}</td>
-                                                <td>$0</td>
+                                                <td>${{ $value->total_amount }}</td>
+                                                <td>${{ number_format($value->paid_amount) }}</td>
+                                                <td>${{ number_format($value->remaning_amount) }}</td>
+                                                <td>{{ $value->payment_type }}</td>
+                                                <td>{{ $value->remark }}</td>
+                                                <td>{{ $value->created_by_name }}</td>
                                                 <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>
                                                 <td>
                                                     <a href="{{ url('admin/fees_colection/collect_fees/add_fees'.$value->id) }}" class="btn btn-sm btn-success">Collect Fees</a>
@@ -97,7 +104,7 @@
                                         <tr>
                                             <td colspan="100%">Record not found!</td>
                                         </tr>
-                                    @endif --}}
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -115,47 +122,53 @@
           <h5 class="modal-title" id="exampleModalLabel">Add Fees</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-                <label class="col-form-label">Total Amount: </label>
+        <form action="" method="POST">
+            {{ csrf_field() }}
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="col-form-label">Class Name: {{ $getStudent->class_name }}</label>
+                </div>
 
+                <div class="mb-3">
+                    <label class="col-form-label">Total Amount: ${{ number_format($getStudent->amount) }}</label>
+                </div>
+
+                <div class="mb-3">
+                    <label class="col-form-label">Paid Amount: ${{ number_format($paid_amount) }}</label>
+                </div>
+
+                <div class="mb-3">
+                    @php
+                        $remaningAmount = $getStudent->amount - $paid_amount;
+                    @endphp
+                    <label class="col-form-label">Remaning Amount: ${{ number_format($remaningAmount) }}</label>
+                </div>
+
+                <div class="mb-3">
+                    <label class="col-form-label">Amount <span style="color: red">*</span></label>
+                    <input type="number" class="form-control" name="amount">
+                </div>
+
+                <div class="mb-3">
+                    <label class="col-form-label">Payment Type <span style="color: red">*</span></label>
+                    <select name="payment_type" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="cash">Cash</option>
+                        <option value="cheque">Cheque</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="col-form-label">Remark</label>
+                    <textarea class="form-control" name="remark"></textarea>
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label class="col-form-label">Paid Amount: </label>
-
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-
-            <div class="mb-3">
-                <label class="col-form-label">Remaning Amount: </label>
-
-            </div>
-
-            <div class="mb-3">
-              <label class="col-form-label">Amount:</label>
-              <input type="number" class="form-control" name="amount">
-            </div>
-
-            <div class="mb-3">
-                <label class="col-form-label">Payment Type</label>
-                <select name="payment_type" class="form-control" required>
-                    <option value="">Select</option>
-                    <option value="cash">Cash</option>
-                    <option value="cheque">Cheque</option>
-                </select>
-              </div>
-
-            <div class="mb-3">
-              <label class="col-form-label">Remark:</label>
-              <textarea class="form-control" name="remark"></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        </form>
       </div>
     </div>
 </div>
