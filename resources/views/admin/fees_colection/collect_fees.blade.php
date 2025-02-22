@@ -45,7 +45,7 @@
 
                                     <div class="form-group col-md-2">
                                         <button style="margin-top: 23px;" type="submit" class="btn btn-primary">Search</button>
-                                        <a href="{{ url('admin/fees_colection/collect_fees') }}" style="margin-top: 23px;" class="btn btn-success">Reset</a>
+                                        <a href="{{ url('admin/fees_collection/collect_fees') }}" style="margin-top: 23px;" class="btn btn-success">Reset</a>
                                     </div>
 
                                 </div>
@@ -87,7 +87,7 @@
                                                 <td>${{ number_format($remaningAmount) }}</td>
                                                 <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>
                                                 <td>
-                                                    <a href="{{ url('admin/fees_colection/collect_fees/add_fees/'.$value->id) }}" class="btn btn-sm btn-success">Collect Fees</a>
+                                                    <a href="{{ url('admin/fees_collection/collect_fees/add_fees/'.$value->id) }}" class="btn btn-sm btn-success">Collect Fees</a>
                                                 </td>
                                             </tr>
                                         @empty

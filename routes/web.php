@@ -164,9 +164,9 @@ Route::middleware(AdminMiddleware::class)->group(function () {
 
     Route::get('admin/homework/homework_report', [HomeworkController::class, 'homework_report']);
 
-    Route::get('admin/fees_colection/collect_fees', [FeesColectionController::class, 'collect_fees']);
-    Route::get('admin/fees_colection/collect_fees/add_fees/{student_id}', [FeesColectionController::class, 'add_collect_fees']);
-    Route::post('admin/fees_colection/collect_fees/add_fees/{student_id}', [FeesColectionController::class, 'insert_collect_fees']);
+    Route::get('admin/fees_collection/collect_fees', [FeesColectionController::class, 'collect_fees']);
+    Route::get('admin/fees_collection/collect_fees/add_fees/{student_id}', [FeesColectionController::class, 'add_collect_fees']);
+    Route::post('admin/fees_collection/collect_fees/add_fees/{student_id}', [FeesColectionController::class, 'insert_collect_fees']);
 
 });
 
@@ -228,6 +228,9 @@ Route::middleware(StudentMiddleware::class)->group(function () {
     Route::get('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'student_submit_homework']);
     Route::post('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'student_submit_homework_insert']);
     Route::get('student/my_submitted_homework', [HomeworkController::class, 'student_submitted_homework']);
+
+    Route::get('student/fees_collection', [FeesColectionController::class, 'student_collect_fees']);
+    Route::post('student/fees_collection', [FeesColectionController::class, 'student_collect_fees_payment']);
 
 });
 

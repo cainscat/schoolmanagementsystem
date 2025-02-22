@@ -243,17 +243,17 @@
                     </ul>
                 </li>
 
-                <li class="nav-item @if(Request::segment(2) == 'fees_colection') menu-open @endif">
-                    <a href="#" class="nav-link @if(Request::segment(2) == 'fees_colection') active @endif">
+                <li class="nav-item @if(Request::segment(2) == 'fees_collection') menu-open @endif">
+                    <a href="#" class="nav-link @if(Request::segment(2) == 'fees_collection') active @endif">
                       <i class="nav-icon bi bi-table"></i>
                       <p>
-                        Fees Colection
+                        Fees Collection
                         <i class="nav-arrow bi bi-chevron-right"></i>
                       </p>
                     </a>
                     <ul class="nav nav-treeview" style="box-sizing: border-box;">
                         <li class="nav-item">
-                        <a href="{{ url('admin/fees_colection/collect_fees') }}" class="nav-link @if(Request::segment(3) == 'collect_fees') active @endif">
+                        <a href="{{ url('admin/fees_collection/collect_fees') }}" class="nav-link @if(Request::segment(3) == 'collect_fees') active @endif">
                             <i class="nav-icon bi bi-circle"></i>
                             <p>Collect Fees</p>
                         </a>
@@ -507,6 +507,13 @@
                     <a href="{{ url('student/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>Dashboard</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('student/fees_collection') }}" class="nav-link @if(Request::segment(2) == 'fees_collection') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>Fees Collection</p>
                     </a>
                 </li>
 

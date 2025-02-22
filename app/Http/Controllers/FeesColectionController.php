@@ -52,6 +52,7 @@ class FeesColectionController extends Controller
                 $payment->payment_type = trim($request->payment_type);
                 $payment->remark = trim($request->remark);
                 $payment->created_by = Auth::user()->id;
+                $payment->is_payment = 1;
                 $payment->save();
 
                 return redirect()->back()->with('success', "Fees successfully add");
@@ -67,5 +68,64 @@ class FeesColectionController extends Controller
         }
 
     }
+
+
+    //student side
+    public function student_collect_fees(Request $request)
+    {
+        $student_id = Auth::user()->id;
+        $data['getFees'] = StudentAddFeesModel::getFees($student_id);
+        $getStudent = User::getSingleClass($student_id);
+        $data['getStudent'] = $getStudent;
+        $data['header_title'] = "Fees Collection";
+        $data['paid_amount'] = StudentAddFeesModel::getPaidAmount($student_id, $getStudent->class_id);
+        return view('student.my_fees_colection', $data);
+    }
+
+    public function student_collect_fees_payment(Request $request)
+    {
+        $getStudent = User::getSingleClass(Auth::user()->id);
+        $paid_amount = StudentAddFeesModel::getPaidAmount(Auth::user()->id, Auth::user()->class_id);
+
+        if(!empty($request->amount))
+        {
+            $remaningAmount = $getStudent->amount - $paid_amount;
+            if($remaningAmount >= $request->amount)
+            {
+                $remaning_amount_user = $remaningAmount - $request->amount;
+
+                $payment = new StudentAddFeesModel;
+                $payment->student_id = Auth::user()->id;
+                $payment->class_id = Auth::user()->class_id;
+                $payment->paid_amount = trim($request->amount);
+                $payment->total_amount = trim($remaningAmount);
+                $payment->remaning_amount = $remaning_amount_user;
+                $payment->payment_type = trim($request->payment_type);
+                $payment->remark = trim($request->remark);
+                $payment->created_by = Auth::user()->id;
+                $payment->save();
+
+                if($request->payment_type == 'Paypal')
+                {
+
+                }
+                elseif($request->payment_type == 'Stripe')
+                {
+
+                }
+                return redirect()->back()->with('success', "Fees successfully add");
+            }
+            else
+            {
+                return redirect()->back()->with('error', "Your amount go to greather than remaning amount");
+            }
+        }
+        else
+        {
+            return redirect()->back()->with('error', "You need to add at least 1$");
+        }
+
+    }
+
 
 }

@@ -8,8 +8,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="mb-0">
-                        Collect Fees
-                        <span style="color: blue;">{{ $getStudent->name }} {{ $getStudent->last_name }}</span>
+                        Fees Collection
                     </h3>
                 </div>
 
@@ -153,8 +152,8 @@
                     <label class="col-form-label">Payment Type <span style="color: red">*</span></label>
                     <select name="payment_type" class="form-control" required>
                         <option value="">Select</option>
-                        <option value="cash">Cash</option>
-                        <option value="cheque">Cheque</option>
+                        <option value="cash">Paypal</option>
+                        <option value="cheque">Stripe</option>
                     </select>
                 </div>
 
