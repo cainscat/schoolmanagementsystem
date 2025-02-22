@@ -116,6 +116,8 @@ Route::middleware(AdminMiddleware::class)->group(function () {
 
     Route::get('admin/account', [UserController::class, 'my_account']);
     Route::post('admin/account', [UserController::class, 'update_my_account']);
+    Route::get('admin/setting', [UserController::class, 'setting']);
+    Route::post('admin/setting', [UserController::class, 'update_setting']);
 
     Route::get('admin/examinations/exam/list', [ExaminationsController::class, 'exam_list']);
     Route::get('admin/examinations/exam/add', [ExaminationsController::class, 'exam_add']);
@@ -167,6 +169,7 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('admin/fees_collection/collect_fees', [FeesColectionController::class, 'collect_fees']);
     Route::get('admin/fees_collection/collect_fees/add_fees/{student_id}', [FeesColectionController::class, 'add_collect_fees']);
     Route::post('admin/fees_collection/collect_fees/add_fees/{student_id}', [FeesColectionController::class, 'insert_collect_fees']);
+
 
 });
 

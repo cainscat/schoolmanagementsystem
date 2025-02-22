@@ -386,6 +386,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ url('admin/setting') }}" class="nav-link @if(Request::segment(2) == 'setting') active @endif">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>Setting</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ url('admin/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
                         <i class="nav-icon bi bi-person-fill"></i>
                         <p>Change Password</p>
