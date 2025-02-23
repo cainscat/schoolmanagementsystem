@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\ClassModel;
-use App\Models\User;
-use App\Models\StudentAddFeesModel;
 use Auth;
+use App\Models\User;
+use App\Models\ClassModel;
+use App\Models\SettingModel;
+use Illuminate\Http\Request;
+use App\Models\StudentAddFeesModel;
 
 class FeesColectionController extends Controller
 {
@@ -105,11 +106,26 @@ class FeesColectionController extends Controller
                 $payment->created_by = Auth::user()->id;
                 $payment->save();
 
-                if($request->payment_type == 'Paypal')
+                $getSetting = SettingModel::getSingle();
+                if($request->payment_type == 'paypal')
                 {
+                    $query = array();
+                    $query['business'] = $getSetting->paypal_email;
+                    $query['cmd'] = '_xclick';
+                    $query['item_name'] = "Student Fees";
+                    $query['no_shipping'] = '1';
+                    $query['item_number'] = $payment->id;
+                    $query['amount'] = $request->amount;
+                    $query['currency_code'] = 'USD';
+                    $query['cancel_return'] = url('student/paypal/payment-error');
+                    $query['return'] = url('student/paypal/payment-success');
 
+                    $query_string = http_build_query($query);
+
+                    header('Location: http://www.sandbox.paypal.com/cgi-bin/webscr?'. $query_string);
+                    exit();
                 }
-                elseif($request->payment_type == 'Stripe')
+                elseif($request->payment_type == 'stripe')
                 {
 
                 }
@@ -125,6 +141,43 @@ class FeesColectionController extends Controller
             return redirect()->back()->with('error', "You need to add at least 1$");
         }
 
+    }
+
+    public function payment_error()
+    {
+        return redirect('student/fees_collection')->with('error', "Due to some error. Please try again!");
+    }
+
+    public function payment_success(Request $request)
+    {
+        // if(!empty($request->PayerID))
+        // {
+        //     echo 'Paypal auto redirect not work!';
+        //     dd($request->all());
+        // }
+
+        //Paypal auto redirect not working....
+
+        if(!empty($request->item_number) && !empty($request->st) && $request->st == 'Completed')
+        {
+            $fees = StudentAddFeesModel::getSingle($request->item_number);
+            if(!empty($fees))
+            {
+                $fees->is_payment = 1;
+                $fees->payment_data = json_encode($request->all);
+                $fees->save();
+
+                return redirect('student/fees_collection')->with('success', "Your payment is successfully");
+            }
+            else
+            {
+                return redirect('student/fees_collection')->with('error', "Due to some error. Please try again!");
+            }
+        }
+        else
+        {
+            return redirect('student/fees_collection')->with('error', "Due to some error. Please try again!");
+        }
     }
 
 

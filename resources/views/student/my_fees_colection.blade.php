@@ -152,8 +152,8 @@
                     <label class="col-form-label">Payment Type <span style="color: red">*</span></label>
                     <select name="payment_type" class="form-control" required>
                         <option value="">Select</option>
-                        <option value="cash">Paypal</option>
-                        <option value="cheque">Stripe</option>
+                        <option value="paypal">Paypal</option>
+                        <option value="stripe">Stripe</option>
                     </select>
                 </div>
 
