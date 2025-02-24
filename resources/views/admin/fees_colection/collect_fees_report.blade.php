@@ -6,14 +6,10 @@
     <div class="app-content-header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <h3 class="mb-0">
-                        Fees Collection
+                        Collect Fees Report
                     </h3>
-                </div>
-
-                <div class="col-sm-6" style="text-align: right;">
-                    <button type="button" id="AddFees" class="btn btn-primary">Add Fees</button>
                 </div>
             </div>
         </div>
@@ -25,7 +21,7 @@
                 <div class="col-md-12">
                     @include('layouts._message')
 
-                    {{-- <div class="card card-primary">
+                    <div class="card card-primary">
                         <form action="" method="get">
                             <div class="card-body">
                                 <div class="row">
@@ -44,29 +40,53 @@
                                         <input type="text" class="form-control" value="{{ Request::get('student_id') }}" name="student_id" placeholder="Student ID">
                                     </div>
 
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-2">
                                         <label>Student Name</label>
                                         <input type="text" class="form-control" value="{{ Request::get('student_name') }}" name="student_name" placeholder="Student Name">
                                     </div>
 
                                     <div class="form-group col-md-2">
+                                        <label>Payment Type</label>
+                                        <select name="payment_type" class="form-control">
+                                            <option value="">Select</option>
+                                            <option {{ (Request::get('payment_type') == 'cash' ? 'selected' : '') }} value="cash">Cash</option>
+                                            <option {{ (Request::get('payment_type') == 'paypal' ? 'selected' : '') }} value="paypal">Paypal</option>
+                                            <option {{ (Request::get('payment_type') == 'stripe' ? 'selected' : '') }} value="stripe">Stripe</option>
+                                            <option {{ (Request::get('payment_type') == 'cheque' ? 'selected' : '') }} value="cheque">Cheque</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>Start Created Date</label>
+                                        <input type="date" name="start_created_date" value="{{ Request::get('start_created_date') }}" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
+                                        <label>End Created Date</label>
+                                        <input type="date" name="end_created_date" value="{{ Request::get('end_created_date') }}" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-md-2">
                                         <button style="margin-top: 23px;" type="submit" class="btn btn-primary">Search</button>
-                                        <a href="{{ url('admin/fees_colection/collect_fees') }}" style="margin-top: 23px;" class="btn btn-success">Reset</a>
+                                        <a href="{{ url('admin/fees_collection/collect_fees_report') }}" style="margin-top: 23px;" class="btn btn-success">Reset</a>
                                     </div>
 
                                 </div>
                             </div>
                         </form>
-                    </div> --}}
+                    </div>
 
-                    <div class="card mb-4">
+                    <div class="card mb-4 mt-3">
                         <div class="card-header">
-                            <h3 class="card-title">Payment Detail</h3>
+                            <h3 class="card-title">Report List</h3>
                         </div>
                         <div class="card-body p-0">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
+                                        <th>Student ID</th>
+                                        <th>Student Name</th>
                                         <th>Class Name</th>
                                         <th>Total Amount ($)</th>
                                         <th>Paid Amount ($)</th>
@@ -78,9 +98,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if(!empty($getFees))
-                                        @forelse ($getFees as $value)
+                                    @if(!empty($getRecord))
+                                        @forelse ($getRecord as $value)
                                             <tr class="align-middle">
+                                                <td>{{ $value->id }}</td>
+                                                <td>{{ $value->student_id }}</td>
+                                                <td>{{ $value->first_name }} {{ $value->last_name }}</td>
                                                 <td>{{ $value->class_name }}</td>
                                                 <td>${{ $value->total_amount }}</td>
                                                 <td>${{ number_format($value->paid_amount) }}</td>
@@ -102,6 +125,11 @@
                                     @endif
                                 </tbody>
                             </table>
+                            @if(!empty($getRecord))
+                                <div style="margin-top: 5px; float:right;">
+                                    {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -110,70 +138,7 @@
     </div>
 </main>
 
-<div class="modal fade" id="AddFeesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Fees</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form action="" method="POST">
-            {{ csrf_field() }}
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="col-form-label">Class Name: {{ $getStudent->class_name }}</label>
-                </div>
-
-                <div class="mb-3">
-                    <label class="col-form-label">Total Amount: ${{ number_format($getStudent->amount) }}</label>
-                </div>
-
-                <div class="mb-3">
-                    <label class="col-form-label">Paid Amount: ${{ number_format($paid_amount) }}</label>
-                </div>
-
-                <div class="mb-3">
-                    @php
-                        $remaningAmount = $getStudent->amount - $paid_amount;
-                    @endphp
-                    <label class="col-form-label">Remaning Amount: ${{ number_format($remaningAmount) }}</label>
-                </div>
-
-                <div class="mb-3">
-                    <label class="col-form-label">Amount <span style="color: red">*</span></label>
-                    <input type="number" class="form-control" name="amount">
-                </div>
-
-                <div class="mb-3">
-                    <label class="col-form-label">Payment Type <span style="color: red">*</span></label>
-                    <select name="payment_type" class="form-control" required>
-                        <option value="">Select</option>
-                        <option value="paypal">Paypal</option>
-                        <option value="stripe">Stripe</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label class="col-form-label">Remark</label>
-                    <textarea class="form-control" name="remark"></textarea>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
-      </div>
-    </div>
-</div>
-
 @endsection
 
 @section('script')
-<script>
-    $('#AddFees').click(function() {
-        $('#AddFeesModal').modal('show');
-    });
-</script>
 @endsection

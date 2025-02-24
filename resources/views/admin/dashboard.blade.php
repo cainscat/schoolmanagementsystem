@@ -25,7 +25,7 @@
               <div class="icon">
                 <i class="nav-icon bi bi-bag"></i>
               </div>
-              <a href="" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
+              <a href="{{ url('admin/fees_collection/collect_fees_report') }}" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
                 More info <i class="bi bi-link-45deg"></i>
               </a>
             </div>
@@ -40,7 +40,7 @@
               <div class="icon">
                 <i class="nav-icon bi bi-bag"></i>
               </div>
-              <a href="" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
+              <a href="{{ url('admin/fees_collection/collect_fees_report?start_created_date='.date('Y-m-d').'&end_created_date='.date('Y-m-d').'') }}" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
                 More info <i class="bi bi-link-45deg"></i>
               </a>
             </div>

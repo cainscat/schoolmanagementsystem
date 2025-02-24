@@ -40,11 +40,11 @@ class StudentAttendanceModel extends Model
                     }
                     if(!empty(Request::get('start_attendance_date')))
                     {
-                        $return = $return->where('student_attendance.attendance_date', '>=', Request::get('start_attendance_date'));
+                        $return = $return->whereDate('student_attendance.attendance_date', '>=', Request::get('start_attendance_date'));
                     }
                     if(!empty(Request::get('end_attendance_date')))
                     {
-                        $return = $return->where('student_attendance.attendance_date', '<=', Request::get('end_attendance_date'));
+                        $return = $return->whereDate('student_attendance.attendance_date', '<=', Request::get('end_attendance_date'));
                     }
                     if(!empty(Request::get('attendance_type')))
                     {

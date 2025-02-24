@@ -253,11 +253,19 @@
                     </a>
                     <ul class="nav nav-treeview" style="box-sizing: border-box;">
                         <li class="nav-item">
-                        <a href="{{ url('admin/fees_collection/collect_fees') }}" class="nav-link @if(Request::segment(3) == 'collect_fees') active @endif">
-                            <i class="nav-icon bi bi-circle"></i>
-                            <p>Collect Fees</p>
-                        </a>
+                            <a href="{{ url('admin/fees_collection/collect_fees') }}" class="nav-link @if(Request::segment(3) == 'collect_fees') active @endif">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Collect Fees</p>
+                            </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="{{ url('admin/fees_collection/collect_fees_report') }}" class="nav-link @if(Request::segment(3) == 'collect_fees_report') active @endif">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Collect Fees Report</p>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 
