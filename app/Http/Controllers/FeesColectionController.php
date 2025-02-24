@@ -184,12 +184,6 @@ class FeesColectionController extends Controller
 
     public function payment_success(Request $request)
     {
-        // if(!empty($request->PayerID))
-        // {
-        //     echo 'Paypal auto redirect not work!';
-        //     dd($request->all());
-        // }
-
         //Paypal auto redirect not working....
 
         if(!empty($request->item_number) && !empty($request->st) && $request->st == 'Completed')
@@ -242,5 +236,166 @@ class FeesColectionController extends Controller
         }
     }
 
+    //parent side
+    public function my_student_fees_collection($student_id, Request $request)
+    {
+        $data['getFees'] = StudentAddFeesModel::getFees($student_id);
+
+        $getStudent = User::getSingleClass($student_id);
+        $data['getStudent'] = $getStudent;
+
+        $data['header_title'] = "Fees Collection";
+        $data['paid_amount'] = StudentAddFeesModel::getPaidAmount($student_id, $getStudent->class_id);
+        return view('parent.fees_colection', $data);
+    }
+
+    public function parent_collect_fees_payment($student_id, Request $request)
+    {
+        $getStudent = User::getSingleClass($student_id);
+        $paid_amount = StudentAddFeesModel::getPaidAmount($student_id, $getStudent->class_id);
+
+        if(!empty($request->amount))
+        {
+            $remaningAmount = $getStudent->amount - $paid_amount;
+            if($remaningAmount >= $request->amount)
+            {
+                $remaning_amount_user = $remaningAmount - $request->amount;
+
+                $payment = new StudentAddFeesModel;
+                $payment->student_id = $getStudent->id;
+                $payment->class_id = $getStudent->class_id;
+                $payment->paid_amount = trim($request->amount);
+                $payment->total_amount = trim($remaningAmount);
+                $payment->remaning_amount = $remaning_amount_user;
+                $payment->payment_type = trim($request->payment_type);
+                $payment->remark = trim($request->remark);
+                $payment->created_by = Auth::user()->id;
+                $payment->save();
+
+                $getSetting = SettingModel::getSingle();
+                if($request->payment_type == 'paypal')
+                {
+                    $query = array();
+                    $query['business'] = $getSetting->paypal_email;
+                    $query['cmd'] = '_xclick';
+                    $query['item_name'] = "Student Fees";
+                    $query['no_shipping'] = '1';
+                    $query['item_number'] = $payment->id;
+                    $query['amount'] = $request->amount;
+                    $query['currency_code'] = 'USD';
+                    $query['cancel_return'] = url('parent/paypal/payment-error/'.$student_id);
+                    $query['return'] = url('parent/paypal/payment-success/'.$student_id);
+
+                    $query_string = http_build_query($query);
+
+                    header('Location: http://www.sandbox.paypal.com/cgi-bin/webscr?'. $query_string);
+                    exit();
+                }
+                else if($request->payment_type == 'stripe')
+                {
+                    $setPublicKey = $getSetting->stripe_key;
+                    $setApiKey = $getSetting->stripe_secret;
+
+                    Stripe::setApiKey($setApiKey);
+                    $finalprice = $request->amount * 100;
+
+                    $session = \Stripe\Checkout\Session::create([
+                        'customer_email' => Auth::user()->email,
+                        'payment_method_types' => ['card'],
+                        'line_items' => [[
+                            'price_data' => [
+                                'currency' => 'usd',
+                                'product_data' => [
+                                    'name' => 'Student Fees',
+                                    'description' => 'Student Fees',
+                                ],
+                                'unit_amount' => intval($finalprice),
+                            ],
+                            'quantity' => 1,
+                        ]],
+                        'mode' => 'payment',
+                        'success_url' => url('parent/stripe/payment-success/'.$student_id),
+                        'cancel_url' => url('parent/stripe/payment-error/'.$student_id),
+                    ]);
+
+                    $payment->stripe_session_id = $session['id'];
+                    $payment->save();
+
+                    $data['session_id'] = $session['id'];
+                    Session::put('stripe_session_id', $session['id']);
+                    $data['setPublickey'] = $setPublicKey;
+
+                    return view('payment.stripe_charge', $data);
+
+                }
+            }
+            else
+            {
+                return redirect()->back()->with('error', "Your amount go to greather than remaning amount");
+            }
+        }
+        else
+        {
+            return redirect()->back()->with('error', "You need to add at least 1$");
+        }
+
+    }
+
+    public function parent_payment_error($student_id)
+    {
+        return redirect('parent/my_student/fees_collection/'.$student_id)->with('error', "Due to some error. Please try again!");
+    }
+
+    public function parent_payment_success($student_id, Request $request)
+    {
+        if(!empty($request->item_number) && !empty($request->st) && $request->st == 'Completed')
+        {
+            $fees = StudentAddFeesModel::getSingle($request->item_number);
+            if(!empty($fees))
+            {
+                $fees->is_payment = 1;
+                $fees->payment_data = json_encode($request->all());
+                $fees->save();
+
+                return redirect('parent/my_student/fees_collection/'.$student_id)->with('success', "Your payment is successfully");
+            }
+            else
+            {
+                return redirect('parent/my_student/fees_collection/'.$student_id)->with('error', "Due to some error. Please try again!");
+            }
+        }
+        else
+        {
+            return redirect('parent/my_student/fees_collection/'.$student_id)->with('error', "Due to some error. Please try again!");
+        }
+    }
+
+    public function parent_payment_success_stripe($student_id, Request $request)
+    {
+        $getSetting = SettingModel::getSingle();
+        $setPublicKey = $getSetting->stripe_key;
+        $setApiKey = $getSetting->stripe_secret;
+
+        $trans_id = Session::get('stripe_session_id');
+        $getFee = StudentAddFeesModel::where('stripe_session_id', '=', $trans_id)->first();
+
+        \Stripe\Stripe::setApiKey($setApiKey);
+        $getdata = \Stripe\Checkout\Session::retrieve($trans_id);
+
+        if(!empty($getdata->id) && $getdata->id == $trans_id && !empty($getFee) && $getdata->status == 'complete' && $getdata->payment_status == 'paid')
+        {
+            $getFee->is_payment = 1;
+            $getFee->payment_data = json_encode($getdata->id);
+            $getFee->save();
+
+            Session::forget('stripe_session_id');
+
+            return redirect('parent/my_student/fees_collection/'.$student_id)->with('success', "Your payment is successfull!");
+        }
+        else
+        {
+            return redirect('parent/my_student/fees_collection/'.$student_id)->with('error', "Due to some error. Please try again!");
+        }
+    }
 
 }

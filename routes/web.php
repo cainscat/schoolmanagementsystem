@@ -267,5 +267,12 @@ Route::middleware(ParentMiddleware::class)->group(function () {
     Route::get('parent/my_student/homework/{student_id}', [HomeworkController::class, 'my_student_homework']);
     Route::get('parent/my_student/submitted_homework/{student_id}', [HomeworkController::class, 'my_student_submitted_homework']);
 
+    Route::get('parent/my_student/fees_collection/{student_id}', [FeesColectionController::class, 'my_student_fees_collection']);
+    Route::post('parent/my_student/fees_collection/{student_id}', [FeesColectionController::class, 'parent_collect_fees_payment']);
+
+    Route::get('parent/paypal/payment-error/{student_id}', [FeesColectionController::class, 'parent_payment_error']);
+    Route::get('parent/paypal/payment-success/{student_id}', [FeesColectionController::class, 'parent_payment_success']);
+    Route::get('parent/stripe/payment-error/{student_id}', [FeesColectionController::class, 'parent_payment_error']);
+    Route::get('parent/stripe/payment-success/{student_id}', [FeesColectionController::class, 'parent_payment_success_stripe']);
 
 });

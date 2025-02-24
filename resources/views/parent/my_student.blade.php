@@ -83,6 +83,7 @@
                                                 <a class="btn btn-warning btn-sm mt-2" href="{{ url('parent/my_student/exam_result/'.$value->id) }}">Exam Result</a>
                                                 <a class="btn btn-primary btn-sm mt-2" href="{{ url('parent/my_student/attendance/'.$value->id) }}">Attendance</a>
                                                 <a class="btn btn-primary btn-sm mt-2" href="{{ url('parent/my_student/homework/'.$value->id) }}">Homework</a>
+                                                <a class="btn btn-success btn-sm mt-2" href="{{ url('parent/my_student/fees_collection/'.$value->id) }}">Fees Collection</a>
                                             </td>
                                         </tr>
                                     @endforeach
