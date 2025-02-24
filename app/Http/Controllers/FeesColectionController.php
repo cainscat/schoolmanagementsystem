@@ -8,6 +8,8 @@ use App\Models\ClassModel;
 use App\Models\SettingModel;
 use Illuminate\Http\Request;
 use App\Models\StudentAddFeesModel;
+use Stripe\Stripe;
+use Session;
 
 class FeesColectionController extends Controller
 {
@@ -125,11 +127,43 @@ class FeesColectionController extends Controller
                     header('Location: http://www.sandbox.paypal.com/cgi-bin/webscr?'. $query_string);
                     exit();
                 }
-                elseif($request->payment_type == 'stripe')
+                else if($request->payment_type == 'stripe')
                 {
+                    $setPublicKey = $getSetting->stripe_key;
+                    $setApiKey = $getSetting->stripe_secret;
+
+                    Stripe::setApiKey($setApiKey);
+                    $finalprice = $request->amount * 100;
+
+                    $session = \Stripe\Checkout\Session::create([
+                        'customer_email' => Auth::user()->email,
+                        'payment_method_types' => ['card'],
+                        'line_items' => [[
+                            'price_data' => [
+                                'currency' => 'usd',
+                                'product_data' => [
+                                    'name' => 'Student Fees',
+                                    'description' => 'Student Fees',
+                                ],
+                                'unit_amount' => intval($finalprice),
+                            ],
+                            'quantity' => 1,
+                        ]],
+                        'mode' => 'payment',
+                        'success_url' => url('student/stripe/payment-success'),
+                        'cancel_url' => url('student/stripe/payment-error'),
+                    ]);
+
+                    $payment->stripe_session_id = $session['id'];
+                    $payment->save();
+
+                    $data['session_id'] = $session['id'];
+                    Session::put('stripe_session_id', $session['id']);
+                    $data['setPublickey'] = $setPublicKey;
+
+                    return view('payment.stripe_charge', $data);
 
                 }
-                return redirect()->back()->with('success', "Fees successfully add");
             }
             else
             {
@@ -164,7 +198,7 @@ class FeesColectionController extends Controller
             if(!empty($fees))
             {
                 $fees->is_payment = 1;
-                $fees->payment_data = json_encode($request->all);
+                $fees->payment_data = json_encode($request->all());
                 $fees->save();
 
                 return redirect('student/fees_collection')->with('success', "Your payment is successfully");
@@ -173,6 +207,34 @@ class FeesColectionController extends Controller
             {
                 return redirect('student/fees_collection')->with('error', "Due to some error. Please try again!");
             }
+        }
+        else
+        {
+            return redirect('student/fees_collection')->with('error', "Due to some error. Please try again!");
+        }
+    }
+
+    public function payment_success_stripe(Request $request)
+    {
+        $getSetting = SettingModel::getSingle();
+        $setPublicKey = $getSetting->stripe_key;
+        $setApiKey = $getSetting->stripe_secret;
+
+        $trans_id = Session::get('stripe_session_id');
+        $getFee = StudentAddFeesModel::where('stripe_session_id', '=', $trans_id)->first();
+
+        \Stripe\Stripe::setApiKey($setApiKey);
+        $getdata = \Stripe\Checkout\Session::retrieve($trans_id);
+
+        if(!empty($getdata->id) && $getdata->id == $trans_id && !empty($getFee) && $getdata->status == 'complete' && $getdata->payment_status == 'paid')
+        {
+            $getFee->is_payment = 1;
+            $getFee->payment_data = json_encode($getdata->id);
+            $getFee->save();
+
+            Session::forget('stripe_session_id');
+
+            return redirect('student/fees_collection')->with('success', "Your payment is successfull!");
         }
         else
         {
