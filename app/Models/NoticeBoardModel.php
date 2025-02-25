@@ -72,6 +72,16 @@ class NoticeBoardModel extends Model
         return $return;
     }
 
+    static public function getTotalNotice($message_to)
+    {
+        return self::select('notice_board.id')
+                        ->join('users','users.id','=', 'notice_board.created_by')
+                        ->join('notice_board_message','notice_board_message.notice_board_id','=', 'notice_board.id')
+                        ->where('notice_board_message.message_to', '=', $message_to)
+                        ->where('notice_board.publish_date', '<=', date('Y-m-d'))
+                        ->count();
+    }
+
     public function getMessage()
     {
         return $this->hasMany(NoticeBoardMessageModel::class, 'notice_board_id');

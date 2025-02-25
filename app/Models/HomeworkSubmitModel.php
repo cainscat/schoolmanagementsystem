@@ -132,6 +132,17 @@ class HomeworkSubmitModel extends Model
         return $return;
     }
 
+    static public function getTotalSubmittedHomeworkStudent($student_id)
+    {
+        $return = HomeworkSubmitModel::select('homework_submit.id')
+                    ->join('homework', 'homework.id', '=', 'homework_submit.homework_id')
+                    ->join('class', 'class.id', '=', 'homework.class_id')
+                    ->join('subject', 'subject.id', '=', 'homework.subject_id')
+                    ->where('homework_submit.student_id', '=', $student_id)
+                    ->count();
+        return $return;
+    }
+
     public function getDocument()
     {
         if(!empty($this->document_file) && file_exists('upload/homework/'.$this->document_file))
