@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\SettingModel;
 use Auth;
 use Hash;
+use Str;
 
 class UserController extends Controller
 {
@@ -19,9 +20,32 @@ class UserController extends Controller
     public function update_setting(Request $request)
     {
         $setting = SettingModel::getSingle();
+        $setting->school_name = trim($request->school_name);
         $setting->paypal_email = trim($request->paypal_email);
         $setting->stripe_key = trim($request->stripe_key);
         $setting->stripe_secret = trim($request->stripe_secret);
+
+        if(!empty($request->file('logo')))
+        {
+            $ext = $request->file('logo')->getClientOriginalExtension();
+            $file = $request->file('logo');
+            $randomStr = date('YmdHis').Str::random(10);
+            $filename = strtolower($randomStr).'.'.$ext;
+            $file->move('upload/setting/', $filename);
+
+            $setting->logo = $filename;
+        }
+
+        if(!empty($request->file('fevicon_icon')))
+        {
+            $ext = $request->file('fevicon_icon')->getClientOriginalExtension();
+            $file = $request->file('fevicon_icon');
+            $randomStr = date('YmdHis').Str::random(10);
+            $filename = strtolower($randomStr).'.'.$ext;
+            $file->move('upload/setting/', $filename);
+
+            $setting->fevicon_icon = $filename;
+        }
         $setting->save();
 
         return redirect()->back()->with('success', "Setting is successfully updated");

@@ -64,11 +64,9 @@
                   </p>
                 </div>
               </div>
-              <!--end::Message-->
             </a>
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item">
-              <!--begin::Message-->
               <div class="d-flex">
                 <div class="flex-shrink-0">
                   <img
@@ -90,14 +88,13 @@
                   </p>
                 </div>
               </div>
-              <!--end::Message-->
             </a>
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
           </div>
         </li>
 
-        <li class="nav-item dropdown">
+        {{-- <li class="nav-item dropdown">
           <a class="nav-link" data-bs-toggle="dropdown" href="#">
             <i class="bi bi-bell-fill"></i>
             <span class="navbar-badge badge text-bg-warning">15</span>
@@ -122,7 +119,7 @@
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item dropdown-footer"> See All Notifications </a>
           </div>
-        </li>
+        </li> --}}
 
         <li class="nav-item dropdown user-menu">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -152,9 +149,16 @@
   <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
 
     <div class="sidebar-brand">
-      <a href="javascript:;" class="brand-cn">
-        <span style="font-weight: bold !important;font-size: 25px;margin-left: 55px;" class="brand-text fw-light">School</span>
-      </a>
+        @if(!empty($getHeaderSetting->getLogo() && !empty($getHeaderSetting->school_name)))
+            <a href="javascript:;" class="brand-cn">
+                <img style="width: 50px; margin-left: 30px;" src="{{ $getHeaderSetting->getLogo() }}" alt="">
+                <span style="font-weight: bold !important;font-size: 25px;margin-left: 10px;" class="brand-text fw-light">{{ $getHeaderSetting->school_name }}</span>
+            </a>
+        @else
+            <a href="javascript:;" class="brand-cn">
+                <span style="font-weight: bold !important;font-size: 25px;margin-left: 50px;" class="brand-text fw-light">{{ $getHeaderSetting->school_name }}</span>
+            </a>
+        @endif
     </div>
 
     <div class="sidebar-wrapper">

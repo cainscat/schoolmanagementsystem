@@ -18,9 +18,14 @@
                 <div class="col-md-12">
                     @include('_message')
                     <div class="card card-primary">
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>School Name</label>
+                                    <input type="text" class="form-control" value="{{ old('school_name', $getRecord->school_name) }}" name="school_name" required placeholder="School Name">
+                                </div>
 
                                 <div class="form-group">
                                     <label>Paypal Business Email</label>
@@ -35,6 +40,22 @@
                                 <div class="form-group">
                                     <label>Stripe Secret</label>
                                     <input type="text" class="form-control" value="{{ $getRecord->stripe_secret }}" name="stripe_secret">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Logo <span style="color: red;"></span></label>
+                                    <input type="file" class="form-control" name="logo">
+                                    @if(!empty($getRecord->getLogo()))
+                                        <img style="width: 100px;" src="{{ $getRecord->getLogo() }}">
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Fevicon Icon <span style="color: red;"></span></label>
+                                    <input type="file" class="form-control" name="fevicon_icon">
+                                    @if(!empty($getRecord->getFevicon()))
+                                        <img style="width: 100px;" src="{{ $getRecord->getFevicon() }}">
+                                    @endif
                                 </div>
 
                             </div>
