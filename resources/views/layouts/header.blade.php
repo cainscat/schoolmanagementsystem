@@ -126,13 +126,13 @@
 
         <li class="nav-item dropdown user-menu">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-            <img src="{{ url('public/dist/assets/img/user2-160x160.jpg') }}" class="user-image rounded-circle shadow" alt="User Image"/>
+            <img src="{{ Auth::user()->getProfileDirect() }}" class="user-image rounded-circle shadow" alt="{{ Auth::user()->name }}"/>
             <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
           </a>
           <ul style="min-width: 250px;max-width: 250px;" class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
 
             <li style="min-height: 150px;padding: 2px;" class="user-header text-bg-primary">
-              <img src="{{ url('public/dist/assets/img/user2-160x160.jpg') }}" class="rounded-circle shadow" alt="User Image"/>
+              <img src="{{ Auth::user()->getProfileDirect() }}" class="rounded-circle shadow" alt="{{ Auth::user()->name }}"/>
               <p>
                 {{ Auth::user()->name }}
                 <small>Member since {{ Auth::user()->created_at }}</small>
@@ -152,10 +152,11 @@
   <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
 
     <div class="sidebar-brand">
-      <a href="javascript:;" class="brand-link">
+      <a href="javascript:;" class="brand-cn">
         <span style="font-weight: bold !important;font-size: 25px;margin-left: 55px;" class="brand-text fw-light">School</span>
       </a>
     </div>
+
     <div class="sidebar-wrapper">
       <nav class="mt-2">
         <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">

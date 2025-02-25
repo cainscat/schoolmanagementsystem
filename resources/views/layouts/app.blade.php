@@ -15,6 +15,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous"/>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
+    <style>
+        .layout-fixed .brand-cn {
+            width: 250px;
+        }
+        .sidebar-brand .brand-cn {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        .brand-cn {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            padding: .8125rem .5rem;
+            transition: width .3sease-in-out;
+            white-space: nowrap;
+        }
+    </style>
     @yield('style')
   </head>
   <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
