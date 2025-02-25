@@ -56,8 +56,8 @@
                                         <label>Profile Pic <span style="color: red;"></span></label>
                                         <input type="file" class="form-control" name="profile_pic">
                                         <div style="color: red">{{ $errors->first('profile_pic') }}</div>
-                                        @if(!empty($getRecord->getProfile()))
-                                            <img style="width: 100px;" src="{{ $getRecord->getProfile() }}">
+                                        @if(!empty($getRecord->getProfileDirect()))
+                                            <img style="width: 100px;" src="{{ $getRecord->getProfileDirect() }}">
                                         @endif
                                     </div>
 

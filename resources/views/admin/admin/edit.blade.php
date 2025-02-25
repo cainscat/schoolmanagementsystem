@@ -17,9 +17,19 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-primary">
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Profile Pic <span style="color: red;"></span></label>
+                                    <input type="file" class="form-control" name="profile_pic">
+                                    <div style="color: red">{{ $errors->first('profile_pic') }}</div>
+                                    @if(!empty($getRecord->getProfileDirect()))
+                                        <img style="width: 100px;" src="{{ $getRecord->getProfileDirect() }}">
+                                    @endif
+                                </div>
+
                                 <div class="form-group">
                                     <label>Name</label>
                                     <input type="text" class="form-control" value="{{ old('name', $getRecord->name) }}" name="name" required placeholder="Enter Name">

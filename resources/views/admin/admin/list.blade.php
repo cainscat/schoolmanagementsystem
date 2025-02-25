@@ -61,6 +61,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Profile Pic</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Created Date</th>
@@ -71,6 +72,11 @@
                                     @foreach ($getRecord as $value)
                                         <tr class="align-middle">
                                             <td>{{ $value->id }}</td>
+                                            <td>
+                                                @if(!empty($value->getProfileDirect()))
+                                                    <img style="width: 100px; height: 70px; border-radius: 3%" src="{{ $value->getProfileDirect() }}">
+                                                @endif
+                                            </td>
                                             <td>{{ $value->name }}</td>
                                             <td>{{ $value->email }}</td>
                                             <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>

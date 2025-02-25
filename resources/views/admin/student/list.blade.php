@@ -152,8 +152,8 @@
                                         <tr class="align-middle">
                                             <td>{{ $value->id }}</td>
                                             <td>
-                                                @if(!empty($value->getProfile()))
-                                                    <img style="width: 100px;" src="{{ $value->getProfile() }}">
+                                                @if(!empty($value->getProfileDirect()))
+                                                    <img style="width: 100px;" src="{{ $value->getProfileDirect() }}">
                                                 @endif
                                             </td>
                                             <td>{{ $value->name }} {{ $value->last_name }}</td>

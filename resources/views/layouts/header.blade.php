@@ -153,7 +153,7 @@
 
     <div class="sidebar-brand">
       <a href="javascript:;" class="brand-link">
-        <span style="font-weight: bold !important;font-size: 25px;margin-left: 0px;" class="brand-text fw-light">School</span>
+        <span style="font-weight: bold !important;font-size: 25px;margin-left: 55px;" class="brand-text fw-light">School</span>
       </a>
     </div>
     <div class="sidebar-wrapper">
