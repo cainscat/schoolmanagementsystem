@@ -342,7 +342,59 @@ class User extends Authenticatable
                     ->get();
 
         return $return;
+    }
 
+    static public function getMyTotalStudentParent($parent_id)
+    {
+        $return = self::select('users.id')
+                    ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
+                    ->join('class', 'class.id', '=', 'users.class_id', 'left')
+                    ->where('users.user_type', '=', 3)
+                    ->where('users.parent_id', '=', $parent_id)
+                    ->where('users.is_delete', '=', 0)
+                    ->count();
+
+        return $return;
+    }
+
+    static public function getMyStudentIDs($parent_id)
+    {
+        $return = self::select('users.id')
+                ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
+                ->join('class', 'class.id', '=', 'users.class_id', 'left')
+                ->where('users.user_type', '=', 3)
+                ->where('users.parent_id', '=', $parent_id)
+                ->where('users.is_delete', '=', 0)
+                ->orderBy('users.id', 'desc')
+                ->get();
+
+        $student_ids = array();
+        foreach($return as $value)
+        {
+            $student_ids[] = $value->id;
+        }
+
+        return $student_ids;
+    }
+
+    static public function getMyStudentClassIDs($parent_id)
+    {
+        $return = self::select('users.class_id')
+                ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
+                ->join('class', 'class.id', '=', 'users.class_id')
+                ->where('users.user_type', '=', 3)
+                ->where('users.parent_id', '=', $parent_id)
+                ->where('users.is_delete', '=', 0)
+                ->orderBy('users.id', 'desc')
+                ->get();
+
+        $class_ids = array();
+        foreach($return as $value)
+        {
+            $class_ids[] = $value->class_id;
+        }
+
+        return $class_ids;
     }
 
     static public function getTeacher()

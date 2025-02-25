@@ -91,5 +91,12 @@ class StudentAddFeesModel extends Model
                 ->sum('student_add_fees.paid_amount');
     }
 
+    static public function getTotalPaidAmountStudentParent($student_ids)
+    {
+        return self::where('student_add_fees.is_payment', '=', 1)
+                ->whereIn('student_add_fees.student_id', $student_ids)
+                ->sum('student_add_fees.paid_amount');
+    }
+
 
 }
