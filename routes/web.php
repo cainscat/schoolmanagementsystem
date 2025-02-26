@@ -283,5 +283,6 @@ Route::middleware(ParentMiddleware::class)->group(function () {
 
 Route::middleware(CommonMiddleware::class)->group(function () {
     Route::get('chat', [ChatController::class, 'chat']);
+    Route::post('submit_message', [ChatController::class, 'submit_message']);
 
 });

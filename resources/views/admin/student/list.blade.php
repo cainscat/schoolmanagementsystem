@@ -181,9 +181,10 @@
                                             <td>{{ $value->caste }}</td>
                                             <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>
                                             <td>{{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
-                                            <td style="min-width: 120px;">
-                                                <a href="{{ url('admin/student/edit/'.$value->id) }}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-                                                <a href="{{ url('admin/student/delete/'.$value->id) }}" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a>
+                                            <td style="min-width: 140px;">
+                                                <a href="{{ url('admin/student/edit/'.$value->id) }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a>
+                                                <a href="{{ url('admin/student/delete/'.$value->id) }}" class="btn btn-sm btn-danger"><i class="bi bi-trash3-fill"></i></a>
+                                                <a href="{{ url('chat?received_id='.base64_encode($value->id)) }}" class="btn btn-sm btn-success"><i class="bi bi-chat-left-dots-fill"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
