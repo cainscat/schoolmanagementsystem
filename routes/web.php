@@ -1,12 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\ClassController;
+use App\Http\Middleware\CommonMiddleware;
 use App\Http\Middleware\ParentMiddleware;
 use App\Http\Controllers\ParentController;
 use App\Http\Middleware\StudentMiddleware;
@@ -275,5 +278,10 @@ Route::middleware(ParentMiddleware::class)->group(function () {
     Route::get('parent/paypal/payment-success/{student_id}', [FeesColectionController::class, 'parent_payment_success']);
     Route::get('parent/stripe/payment-error/{student_id}', [FeesColectionController::class, 'parent_payment_error']);
     Route::get('parent/stripe/payment-success/{student_id}', [FeesColectionController::class, 'parent_payment_success_stripe']);
+
+});
+
+Route::middleware(CommonMiddleware::class)->group(function () {
+    Route::get('chat', [ChatController::class, 'chat']);
 
 });
