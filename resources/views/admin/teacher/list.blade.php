@@ -158,7 +158,7 @@
                                             <td style="min-width: 140px;">
                                                 <a href="{{ url('admin/teacher/edit/'.$value->id) }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a>
                                                 <a href="{{ url('admin/teacher/delete/'.$value->id) }}" class="btn btn-sm btn-danger"><i class="bi bi-trash3-fill"></i></a>
-                                                <a href="{{ url('chat?received_id='.base64_encode($value->id)) }}" class="btn btn-sm btn-success"><i class="bi bi-chat-left-dots-fill"></i></a>
+                                                <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-sm btn-success"><i class="bi bi-chat-left-dots-fill"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

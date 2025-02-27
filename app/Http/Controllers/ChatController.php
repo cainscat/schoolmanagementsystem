@@ -14,17 +14,24 @@ class ChatController extends Controller
         $data['header_title'] = "Chat";
 
         $sender_id = Auth::user()->id;
-        if(!empty($request->received_id))
+        if(!empty($request->receiver_id))
         {
-            $received_id = base64_decode($request->received_id);
-            if($received_id == $sender_id)
+            $receiver_id = base64_decode($request->receiver_id);
+            if($receiver_id == $sender_id)
             {
                 return redirect()->back()->with('error', "Cant send message to yourself! Please try again!");
                 exit();
             }
+            ChatModel::updateCount($sender_id, $receiver_id);
 
-            $data['getReceived'] = User::getSingle($received_id);
+            $data['getReceiver'] = User::getSingle($receiver_id);
+            // dd($data['getReceiver']);
+            $data['getChat'] = ChatModel::getChat($receiver_id, $sender_id);
+            // dd($data['getChat']);
         }
+
+        $data['getChatUser'] = ChatModel::getChatUser($sender_id);
+        // dd($data['getChatUser']);
 
         return view('chat.list', $data);
     }
@@ -33,13 +40,19 @@ class ChatController extends Controller
     {
         $chat = new ChatModel;
         $chat->sender_id = Auth::user()->id;
-        $chat->received_id = $request->received_id;
+        $chat->receiver_id = $request->receiver_id;
         $chat->message = $request->message;
         $chat->created_date = time();
         $chat->save();
 
-        $json['success'] = true;
-        echo json_encode($json);
+        $getChat = ChatModel::where('id', '=', $chat->id)->get();
+
+        return response()->json([
+            "status" => true,
+            "success" => view('chat._single', [
+                "getChat" => $getChat
+            ])->render(),
+        ],200);
     }
 
 }

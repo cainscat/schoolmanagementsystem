@@ -8,9 +8,9 @@
 
 <div class="chat-message clearfix">
     <form action="" id="SubmitMessage" class="input-group mb-0">
-        <input type="text" value="{{ $getReceived->id }}" name="received_id">
+        <input type="hidden" value="{{ $getReceiver->id }}" name="receiver_id">
         {{ csrf_field() }}
-        <textarea name="message" required class="form-control" rows="1" placeholder="Enter message..."></textarea>
+        <textarea name="message" id="ClearMessage" required class="form-control" rows="1" placeholder="Enter message..."></textarea>
 
         <a href="javascript:void(0);" style="border-radius: 5px;border-color:#d1d1d1" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
         <div class="input-group-prepend">

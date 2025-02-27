@@ -81,7 +81,7 @@
                                             <td>{{ $value->email }}</td>
                                             <td>{{ date('d-m-Y H:i A',strtotime($value->created_at)) }}</td>
                                             <td>
-                                                <a href="{{ url('chat?received_id='.base64_encode($value->id)) }}" class="btn btn-success"><i class="bi bi-chat-left-dots-fill"></i></a>
+                                                <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success"><i class="bi bi-chat-left-dots-fill"></i></a>
 
                                                 <a href="{{ url('admin/admin/edit/'.$value->id) }}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
                                                 <a href="{{ url('admin/admin/delete/'.$value->id) }}" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a>

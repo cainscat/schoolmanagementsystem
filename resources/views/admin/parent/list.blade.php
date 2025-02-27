@@ -132,7 +132,7 @@
                                             <td>{{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
                                             <td style="min-width: 180px;">
                                                 <a href="{{ url('admin/parent/edit/'.$value->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                                <a href="{{ url('chat?received_id='.base64_encode($value->id)) }}" class="btn btn-sm btn-success">Send Message</a>
+                                                <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-sm btn-success">Send Message</a>
                                                 <a href="{{ url('admin/parent/delete/'.$value->id) }}" class="btn btn-sm btn-danger">Delete</a>
                                                 <a style="margin-top: 3px;" href="{{ url('admin/parent/my-student/'.$value->id) }}" class="btn btn-sm btn-primary">My Student</a>
                                             </td>
