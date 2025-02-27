@@ -20,6 +20,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\HomeworkController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Middleware\OnlineUserMiddleware;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\ClassSubjectController;
@@ -288,3 +289,4 @@ Route::middleware(CommonMiddleware::class)->group(function () {
     Route::post('get_chat_search_user', [ChatController::class, 'get_chat_search_user']);
 
 });
+

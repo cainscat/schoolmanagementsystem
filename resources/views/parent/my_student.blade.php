@@ -84,6 +84,7 @@
                                                 <a class="btn btn-primary btn-sm mt-2" href="{{ url('parent/my_student/attendance/'.$value->id) }}">Attendance</a>
                                                 <a class="btn btn-primary btn-sm mt-2" href="{{ url('parent/my_student/homework/'.$value->id) }}">Homework</a>
                                                 <a class="btn btn-success btn-sm mt-2" href="{{ url('parent/my_student/fees_collection/'.$value->id) }}">Fees Collection</a>
+                                                <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-sm mt-2 btn-success">Send Message</a>
                                             </td>
                                         </tr>
                                     @endforeach

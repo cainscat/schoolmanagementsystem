@@ -80,6 +80,7 @@ class ChatModel extends Model
             $data['message'] = $value->message;
             $data['created_date'] = $value->created_date;
             $data['user_id'] = $value->connect_user_id;
+            $data['is_online'] = $value->getConnecUser->OnlineUser();
             $data['name'] = $value->getConnecUser->name.' '.$value->getConnecUser->last_name;
             $data['profile_pic'] = $value->getConnecUser->getProfileDirect();
             $data['message_count'] = $value->CountMessage($value->connect_user_id, $user_id);
