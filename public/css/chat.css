@@ -15,7 +15,7 @@
     top: 0;
     padding: 20px;
     z-index: 7;
-    background: #efefef;
+    background: #ffff;
 }
 
 .chat-app .chat {
@@ -31,7 +31,7 @@
 }
 
 .people-list .chat-list {
-    height: 435px;
+    height: 400px;
     overflow: auto;
 }
 
