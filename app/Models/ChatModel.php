@@ -98,13 +98,24 @@ class ChatModel extends Model
                     ->count();
     }
 
-    //updated read message
-    static public function updateCount($sender_id, $receiver_id)
+    static public function updateCount($sender_id, $receiver_id) //updated read message
     {
         return self::where('sender_id', '=', $receiver_id)
                     ->where('receiver_id', '=', $sender_id)
                     ->where('status', '=', 0)
                     ->update(['status' => '1']);
+    }
+
+    public function getFile()
+    {
+        if(!empty($this->file) && file_exists('upload/chat/'.$this->file))
+        {
+            return url('upload/chat/'.$this->file);
+        }
+        else
+        {
+            return "";
+        }
     }
 
 }
