@@ -26,6 +26,7 @@
                                     <b>Exam: </b>
                                     <span style="color: blue;">{{ $value['exam_name'] }}</span>
                                 </h3>
+                                <a class="btn btn-sm btn-primary" style="float: right;" target="_blank" href="{{ url('student/my_exam_result/print?exam_id='.$value['exam_id'].'&student_id='.Auth::user()->id) }}">Print</a>
                             </div>
                             <div class="card-body p-0">
                                 <table class="table table-striped">
