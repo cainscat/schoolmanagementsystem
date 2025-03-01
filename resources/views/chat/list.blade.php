@@ -2,6 +2,18 @@
 @section('style')
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ url('public/css/chat.css') }}" />
+    <link rel="stylesheet" href="{{ url('public/emojionearea/emojionearea.min.css') }}" rel="stylesheet" />
+
+    <style>
+        .emojionearea-editor{
+            height: 50px !important;
+            min-height: 50px !important;
+        }
+        .input-group-prepend :hover{
+            background-color: #0d6efd;
+            color: #ffff;
+        }
+    </style>
 @endsection
 @section('content')
 <main class="app-main">
@@ -40,7 +52,9 @@
 @endsection
 
 @section('script')
+<script type="text/javascript" src="{{ url('public/emojionearea/emojionearea.min.js') }}"></script>
 <script>
+    $(".emojionearea").emojioneArea();
 
     $('body').delegate('.getChatWindows', 'click', function(e){
         e.preventDefault();
@@ -63,6 +77,7 @@
                 $('#getChatMessageAll').html(data.success);
                 window.history.pushState("", "", "{{ url('chat?receiver_id=') }}"+data.receiver_id);
                 scrolldown();
+                $(".emojionearea").emojioneArea();
             },
             error: function(data){
 
@@ -105,7 +120,8 @@
                 $('#AppendMessage').append(data.success);
                 $('#ClearMessage').val('');
                 $('#file_name').val('');
-                $('.getFileName').html('');
+                $('#getFileName').html('');
+                $('.emojionearea-editor').html('');
                 scrolldown();
             },
             error: function(data){
@@ -126,7 +142,7 @@
 
     $('body').delegate('#file_name', 'change', function(e){
         var filename = this.files[0].name;
-        $('.getFileName').html(filename);
+        $('#getFileName').html(filename);
     });
 </script>
 @endsection
