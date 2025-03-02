@@ -6,6 +6,7 @@ use Auth;
 use App\Models\User;
 use App\Models\ExamModel;
 use App\Models\ClassModel;
+use App\Models\SettingModel;
 use Illuminate\Http\Request;
 use App\Models\MarksGradeModel;
 use App\Models\ClassSubjectModel;
@@ -392,9 +393,37 @@ class ExaminationsController extends Controller
         return view('student.my_exam_result', $data);
     }
 
-    public function my_exam_result_print()
+    public function my_exam_result_print(Request $request)
     {
-        $data['header_title'] = "Print the Exam Result";
+        $exam_id = $request->exam_id;
+        $student_id = $request->student_id;
+
+        $data['getExam'] = ExamModel::getSingle($exam_id);
+        $data['getStudent'] = User::getSingle($student_id);
+
+        $data['getClass'] = MarksRegisterModel::getClass($exam_id, $student_id);
+        // dd($data['getClass']);
+        $data['getSetting'] = SettingModel::getSingle();
+
+        $getExamSubject = MarksRegisterModel::getExamSubject($exam_id, $student_id);
+
+        $dataSubject = array();
+        foreach($getExamSubject as $exam)
+        {
+            $totalScore = $exam['class_work'] + $exam['home_work'] + $exam['test_work'] + $exam['exam'];
+            $dataS = array();
+            $dataS['subject_name'] = $exam['subject_name'];
+            $dataS['class_work'] = $exam['class_work'];
+            $dataS['home_work'] = $exam['home_work'];
+            $dataS['test_work'] = $exam['test_work'];
+            $dataS['exam'] = $exam['exam'];
+            $dataS['total_score'] = $totalScore;
+            $dataS['full_marks'] = $exam['full_marks'];
+            $dataS['passing_marks'] = $exam['passing_marks'];
+            $dataSubject[] = $dataS;
+        }
+        $data['getExamMark'] = $dataSubject;
+
         return view('print_exam_result', $data);
     }
 

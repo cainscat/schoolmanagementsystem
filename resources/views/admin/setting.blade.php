@@ -28,6 +28,16 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label>School Full Name</label>
+                                    <input type="text" class="form-control" value="{{ old('school_full_name', $getRecord->school_full_name) }}" name="school_full_name" required placeholder="School Full Name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Exam Description</label>
+                                    <textarea name="exam_description" class="form-control editor">{{ old('exam_description', $getRecord->exam_description) }}</textarea>
+                                </div>
+
+                                <div class="form-group">
                                     <label>Paypal Business Email</label>
                                     <input type="email" class="form-control" value="{{ $getRecord->paypal_email }}" name="paypal_email" required placeholder="Paypal Business Email">
                                 </div>

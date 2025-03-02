@@ -21,6 +21,8 @@ class UserController extends Controller
     {
         $setting = SettingModel::getSingle();
         $setting->school_name = trim($request->school_name);
+        $setting->school_full_name = trim($request->school_full_name);
+        $setting->exam_description = trim($request->exam_description);
         $setting->paypal_email = trim($request->paypal_email);
         $setting->stripe_key = trim($request->stripe_key);
         $setting->stripe_secret = trim($request->stripe_secret);
