@@ -403,6 +403,7 @@ class ExaminationsController extends Controller
 
         $data['getClass'] = MarksRegisterModel::getClass($exam_id, $student_id);
         // dd($data['getClass']);
+
         $data['getSetting'] = SettingModel::getSingle();
 
         $getExamSubject = MarksRegisterModel::getExamSubject($exam_id, $student_id);
@@ -529,6 +530,7 @@ class ExaminationsController extends Controller
         foreach($getExam as $value)
         {
             $dataE = array();
+            $dataE['exam_id'] = $value->exam_id;
             $dataE['exam_name'] = $value->exam_name;
             $getExamSubject = MarksRegisterModel::getExamSubject($value->exam_id, $student_id);
             $dataSubject = array();

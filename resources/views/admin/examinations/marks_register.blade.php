@@ -135,7 +135,7 @@
                                                             </div>
 
                                                             <div>
-                                                                <button type="button" class="btn btn-success SaveSingleSubject" id="{{ $student->id }}" data-schedule="{{ $subject->id }}" data-val="{{ $subject->subject_id }}" data-exam="{{ Request::get('exam_id') }}" data-class="{{ Request::get('class_id') }}">
+                                                                <button type="button" class="btn btn-sm btn-success SaveSingleSubject" id="{{ $student->id }}" data-schedule="{{ $subject->id }}" data-val="{{ $subject->subject_id }}" data-exam="{{ Request::get('exam_id') }}" data-class="{{ Request::get('class_id') }}">
                                                                     Save Single
                                                                 </button>
                                                             </div>
@@ -166,7 +166,8 @@
                                                         @endphp
                                                     @endforeach
                                                     <td style="width: 150px;">
-                                                        <button type="submit" class="btn btn-primary">Save All</button>
+                                                        <button type="submit" class="btn btn-sm btn-primary">Save All</button>
+                                                        <a class="btn btn-sm btn-primary" style="float: right;" target="_blank" href="{{ url('admin/my_exam_result/print?exam_id='.Request::get('exam_id').'&student_id='.$student->id) }}">Print</a>
                                                         {{-- @if(!empty($totalStudentMark))
                                                             <br>
                                                             <b>Total Student Mark:</b> {{ $totalStudentMark }}

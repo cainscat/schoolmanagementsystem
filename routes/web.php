@@ -144,6 +144,8 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::post('admin/examinations/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_update']);
     Route::get('admin/examinations/marks_grade/delete/{id}', [ExaminationsController::class, 'marks_grade_delete']);
 
+    Route::get('admin/my_exam_result/print', [ExaminationsController::class, 'my_exam_result_print']);
+
     Route::get('admin/attendance/student', [AttendanceController::class, 'attendance_student']);
     Route::post('admin/attendance/student/save', [AttendanceController::class, 'attendance_student_submit']);
     Route::get('admin/attendance/report', [AttendanceController::class, 'attendance_report']);
@@ -196,6 +198,8 @@ Route::middleware(TeacherMiddleware::class)->group(function () {
     Route::get('teacher/marks_register', [ExaminationsController::class, 'marks_register_teacher']);
     Route::post('teacher/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']);
     Route::post('teacher/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
+
+    Route::get('teacher/my_exam_result/print', [ExaminationsController::class, 'my_exam_result_print']);
 
     Route::get('teacher/attendance/student', [AttendanceController::class, 'teacher_attendance_student']);
     Route::post('teacher/attendance/student/save', [AttendanceController::class, 'attendance_student_submit']);
@@ -280,6 +284,9 @@ Route::middleware(ParentMiddleware::class)->group(function () {
     Route::get('parent/paypal/payment-success/{student_id}', [FeesColectionController::class, 'parent_payment_success']);
     Route::get('parent/stripe/payment-error/{student_id}', [FeesColectionController::class, 'parent_payment_error']);
     Route::get('parent/stripe/payment-success/{student_id}', [FeesColectionController::class, 'parent_payment_success_stripe']);
+
+    Route::get('parent/my_exam_result/print', [ExaminationsController::class, 'my_exam_result_print']);
+
 
 });
 
