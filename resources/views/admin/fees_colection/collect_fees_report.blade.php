@@ -79,6 +79,10 @@
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
                             <h3 class="card-title">Report List</h3>
+                            <form style="float: right;" action="{{ url('admin/fees_collection/export_collect_fees_report') }}" method="POST">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-sm btn-primary">Export Excel</button>
+                            </form>
                         </div>
                         <div class="card-body p-0">
                             <table class="table table-striped">

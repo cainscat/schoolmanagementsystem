@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Session;
+use Stripe\Stripe;
 use App\Models\User;
 use App\Models\ClassModel;
 use App\Models\SettingModel;
 use Illuminate\Http\Request;
+use App\Exports\ExportsCollectFees;
 use App\Models\StudentAddFeesModel;
-use Stripe\Stripe;
-use Session;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class FeesColectionController extends Controller
 {
@@ -78,6 +81,11 @@ class FeesColectionController extends Controller
         $data['getRecord'] = StudentAddFeesModel::getRecord();
         $data['header_title'] = "Collect Fees Report";
         return view('admin.fees_colection.collect_fees_report', $data);
+    }
+
+    public function export_collect_fees_report(Request $request)
+    {
+        return Excel::download(new ExportsCollectFees, 'test.csv');
     }
 
 

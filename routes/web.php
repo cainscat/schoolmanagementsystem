@@ -178,6 +178,8 @@ Route::middleware(AdminMiddleware::class)->group(function () {
 
     Route::get('admin/fees_collection/collect_fees_report', [FeesColectionController::class, 'collect_fees_report']);
 
+    Route::post('admin/fees_collection/export_collect_fees_report', [FeesColectionController::class, 'export_collect_fees_report']);
+
 });
 
 Route::middleware(TeacherMiddleware::class)->group(function () {
