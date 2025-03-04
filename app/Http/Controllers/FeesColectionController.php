@@ -180,6 +180,10 @@ class FeesColectionController extends Controller
                     return view('payment.stripe_charge', $data);
 
                 }
+                else if($request->payment_type == 'momo')
+                {
+                    die;
+                }
             }
             else
             {
