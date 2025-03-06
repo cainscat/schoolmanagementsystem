@@ -101,6 +101,25 @@ class FeesColectionController extends Controller
         return view('student.my_fees_colection', $data);
     }
 
+    function execPostRequest($url, $data)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data))
+        );
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        //execute post
+        $result = curl_exec($ch);
+        //close connection
+        curl_close($ch);
+        return $result;
+    }
+
     public function student_collect_fees_payment(Request $request)
     {
         $getStudent = User::getSingleClass(Auth::user()->id);
@@ -189,27 +208,28 @@ class FeesColectionController extends Controller
                     $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
                     $orderInfo = "Thanh toán qua MoMo";
                     $amount = "10000";
-                    $orderId = time() ."";
-                    $redirectUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
-                    $ipnUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
+                    $orderId = rand(00,9999);
+                    $redirectUrl = url('student/momo/payment-success');
+                    $ipnUrl = url('student/momo/payment-success');
                     $extraData = "";
 
-                    $partnerCode = $_POST["partnerCode"];
-                    $accessKey = $_POST["accessKey"];
-                    $serectkey = $_POST["secretKey"];
-                    $orderId = $_POST["orderId"]; // Mã đơn hàng
-                    $orderInfo = $_POST["orderInfo"];
-                    $amount = $_POST["amount"];
-                    $ipnUrl = $_POST["ipnUrl"];
-                    $redirectUrl = $_POST["redirectUrl"];
-                    $extraData = $_POST["extraData"];
+                    $partnerCode = $partnerCode;
+                    $accessKey = $accessKey;
+                    $serectkey = $secretKey;
+                    $orderId = $orderId; // Mã đơn hàng
+                    $orderInfo = $orderInfo;
+                    $amount = $amount;
+                    $ipnUrl = $ipnUrl;
+                    $redirectUrl = $redirectUrl;
+                    $extraData = $extraData;
 
                     $requestId = time() . "";
                     $requestType = "payWithATM";
-                    $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+                    // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
                     //before sign HMAC SHA256 signature
                     $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
                     $signature = hash_hmac("sha256", $rawHash, $serectkey);
+                    // dd($rawHash);
                     $data = array('partnerCode' => $partnerCode,
                         'partnerName' => "Test",
                         "storeId" => "MomoTestStore",
@@ -223,11 +243,16 @@ class FeesColectionController extends Controller
                         'extraData' => $extraData,
                         'requestType' => $requestType,
                         'signature' => $signature);
-                    $result = execPostRequest($endpoint, json_encode($data));
+                    // dd($data);
+                    $result = $this->execPostRequest($endpoint, json_encode($data));
+                    // dd($result);
                     $jsonResult = json_decode($result, true);  // decode json
+                    // dd($jsonResult);
 
                     //Just a example, please check more in there
-                    header('Location: ' . $jsonResult['payment_type']);
+                    // header('Location: ' . $jsonResult['payUrl']);
+                    return redirect()->to($jsonResult['payUrl']);
+
                 }
             }
             else
@@ -245,25 +270,6 @@ class FeesColectionController extends Controller
     public function payment_error()
     {
         return redirect('student/fees_collection')->with('error', "Due to some error. Please try again!");
-    }
-
-    function execPostRequest($url, $data)
-    {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($data))
-        );
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-        //execute post
-        $result = curl_exec($ch);
-        //close connection
-        curl_close($ch);
-        return $result;
     }
 
     public function payment_success(Request $request)
@@ -318,6 +324,11 @@ class FeesColectionController extends Controller
         {
             return redirect('student/fees_collection')->with('error', "Due to some error. Please try again!");
         }
+    }
+
+    public function payment_success_momo(Request $request)
+    {
+        dd($request->all());
     }
 
     //parent side

@@ -253,6 +253,9 @@ Route::middleware(StudentMiddleware::class)->group(function () {
     Route::get('student/stripe/payment-error', [FeesColectionController::class, 'payment_error']);
     Route::get('student/stripe/payment-success', [FeesColectionController::class, 'payment_success_stripe']);
 
+    Route::get('student/momo/payment-error', [FeesColectionController::class, 'payment_error']);
+    Route::get('student/momo/payment-success', [FeesColectionController::class, 'payment_success_momo']);
+
 });
 
 Route::middleware(ParentMiddleware::class)->group(function () {
