@@ -207,6 +207,7 @@ class FeesColectionController extends Controller
                     $accessKey = 'klm05TvNBzhg7h7j';
                     $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
                     $orderInfo = "Thanh toán qua MoMo";
+                    // $amount = $request->amount;
                     $amount = "10000";
                     $orderId = rand(00,9999);
                     $redirectUrl = url('student/momo/payment-success');
@@ -231,8 +232,8 @@ class FeesColectionController extends Controller
                     $signature = hash_hmac("sha256", $rawHash, $serectkey);
                     // dd($rawHash);
                     $data = array('partnerCode' => $partnerCode,
-                        'partnerName' => "Test",
-                        "storeId" => "MomoTestStore",
+                        // 'partnerName' => "Test",
+                        // "storeId" => "MomoTestStore",
                         'requestId' => $requestId,
                         'amount' => $amount,
                         'orderId' => $orderId,
@@ -248,9 +249,6 @@ class FeesColectionController extends Controller
                     // dd($result);
                     $jsonResult = json_decode($result, true);  // decode json
                     // dd($jsonResult);
-
-                    //Just a example, please check more in there
-                    // header('Location: ' . $jsonResult['payUrl']);
                     return redirect()->to($jsonResult['payUrl']);
 
                 }
@@ -329,6 +327,10 @@ class FeesColectionController extends Controller
     public function payment_success_momo(Request $request)
     {
         dd($request->all());
+        if(!empty($request->requestID) && !empty($request->st) && $request->st == 'Completed')
+        {
+
+        }
     }
 
     //parent side
