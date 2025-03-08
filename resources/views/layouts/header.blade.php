@@ -147,7 +147,7 @@
 
                 <li class="nav-item @if(Request::segment(2) == 'fees_collection') menu-open @endif">
                     <a href="#" class="nav-link @if(Request::segment(2) == 'fees_collection') active @endif">
-                      <i class="nav-icon bi bi-table"></i>
+                      <i class="nav-icon bi bi-cash-stack"></i>
                       <p>
                         Fees Collection
                         <i class="nav-arrow bi bi-chevron-right"></i>
@@ -173,7 +173,7 @@
 
                 <li class="nav-item @if(Request::segment(2) == 'examinations') menu-open @endif">
                     <a href="#" class="nav-link @if(Request::segment(2) == 'examinations') active @endif">
-                      <i class="nav-icon bi bi-table"></i>
+                      <i class="nav-icon bi bi-file-text-fill"></i>
                       <p>
                         Examinations
                         <i class="nav-arrow bi bi-chevron-right"></i>
@@ -214,7 +214,7 @@
 
                 <li class="nav-item @if(Request::segment(2) == 'attendance') menu-open @endif">
                     <a href="#" class="nav-link @if(Request::segment(2) == 'attendance') active @endif">
-                      <i class="nav-icon bi bi-table"></i>
+                      <i class="nav-icon bi bi-person-lines-fill"></i>
                       <p>
                         Attendance
                         <i class="nav-arrow bi bi-chevron-right"></i>
@@ -239,7 +239,7 @@
 
                 <li class="nav-item @if(Request::segment(2) == 'communicate') menu-open @endif">
                     <a href="#" class="nav-link @if(Request::segment(2) == 'communicate') active @endif">
-                      <i class="nav-icon bi bi-table"></i>
+                      <i class="nav-icon bi bi-envelope-at-fill"></i>
                       <p>
                         Communicate
                         <i class="nav-arrow bi bi-chevron-right"></i>
@@ -265,7 +265,7 @@
 
                 <li class="nav-item @if(Request::segment(2) == 'homework') menu-open @endif">
                     <a href="#" class="nav-link @if(Request::segment(2) == 'homework') active @endif">
-                      <i class="nav-icon bi bi-table"></i>
+                      <i class="nav-icon bi bi-journal-bookmark-fill"></i>
                       <p>
                         Homework
                         <i class="nav-arrow bi bi-chevron-right"></i>
@@ -297,14 +297,14 @@
 
                 <li class="nav-item">
                     <a href="{{ url('admin/setting') }}" class="nav-link @if(Request::segment(2) == 'setting') active @endif">
-                        <i class="nav-icon bi bi-speedometer"></i>
+                        <i class="nav-icon bi bi-gear-fill"></i>
                         <p>Setting</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('admin/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
-                        <i class="nav-icon bi bi-person-fill"></i>
+                        <i class="nav-icon bi bi-person-gear"></i>
                         <p>Change Password</p>
                     </a>
                 </li>
@@ -348,7 +348,7 @@
 
                 <li class="nav-item">
                     <a href="{{ url('teacher/my_calendar') }}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
-                        <i class="nav-icon bi bi-speedometer"></i>
+                        <i class="nav-icon bi bi-calendar3"></i>
                         <p>Calendar</p>
                     </a>
                 </li>
@@ -362,7 +362,7 @@
 
                 <li class="nav-item @if(Request::segment(2) == 'attendance') menu-open @endif">
                     <a href="#" class="nav-link @if(Request::segment(2) == 'attendance') active @endif">
-                      <i class="nav-icon bi bi-table"></i>
+                      <i class="nav-icon bi bi-person-lines-fill"></i>
                       <p>
                         Attendance
                         <i class="nav-arrow bi bi-chevron-right"></i>
@@ -413,7 +413,7 @@
 
                 <li class="nav-item">
                     <a href="{{ url('teacher/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
-                        <i class="nav-icon bi bi-person-fill"></i>
+                        <i class="nav-icon bi bi-person-gear"></i>
                         <p>Change Password</p>
                     </a>
                 </li>
@@ -429,35 +429,35 @@
 
                 <li class="nav-item">
                     <a href="{{ url('student/fees_collection') }}" class="nav-link @if(Request::segment(2) == 'fees_collection') active @endif">
-                        <i class="nav-icon bi bi-speedometer"></i>
+                        <i class="nav-icon bi bi-cash-stack"></i>
                         <p>Fees Collection</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/my_calendar') }}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
-                        <i class="nav-icon bi bi-speedometer"></i>
+                        <i class="nav-icon bi bi-calendar3"></i>
                         <p>Calendar</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/my_subject') }}" class="nav-link @if(Request::segment(2) == 'my_subject') active @endif">
-                        <i class="nav-icon bi bi-speedometer"></i>
+                        <i class="nav-icon bi bi-journal-text"></i>
                         <p>Subject</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/my_timetable') }}" class="nav-link @if(Request::segment(2) == 'my_timetable') active @endif">
-                        <i class="nav-icon bi bi-speedometer"></i>
+                        <i class="nav-icon bi bi-calendar-week"></i>
                         <p>Timetable</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/my_exam_timetable') }}" class="nav-link @if(Request::segment(2) == 'my_exam_timetable') active @endif">
-                        <i class="nav-icon bi bi-speedometer"></i>
+                        <i class="nav-icon bi bi-calendar-event"></i>
                         <p>Exam Timetable</p>
                     </a>
                 </li>
@@ -471,35 +471,35 @@
 
                 <li class="nav-item">
                     <a href="{{ url('student/my_attendance') }}" class="nav-link @if(Request::segment(2) == 'my_attendance') active @endif">
-                        <i class="nav-icon bi bi-speedometer"></i>
+                        <i class="nav-icon bi bi-person-lines-fill"></i>
                         <p>Attendance</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">
-                        <i class="nav-icon bi bi-speedometer"></i>
+                        <i class="nav-icon bi bi-mailbox"></i>
                         <p>Notice Board</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/my_homework') }}" class="nav-link @if(Request::segment(2) == 'my_homework') active @endif">
-                        <i class="nav-icon bi bi-speedometer"></i>
+                        <i class="nav-icon bi bi-table"></i>
                         <p>Homework</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
-                        <i class="nav-icon bi bi-speedometer"></i>
+                        <i class="nav-icon bi bi-person-gear"></i>
                         <p>Account</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ url('student/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
-                        <i class="nav-icon bi bi-person-fill"></i>
+                        <i class="nav-icon bi bi-person-gear"></i>
                         <p>Change Password</p>
                     </a>
                 </li>
@@ -543,7 +543,7 @@
 
                 <li class="nav-item">
                     <a href="{{ url('parent/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
-                        <i class="nav-icon bi bi-person-fill"></i>
+                        <i class="nav-icon bi bi-person-gear"></i>
                         <p>Change Password</p>
                     </a>
                 </li>
@@ -552,7 +552,7 @@
 
             <li class="nav-item">
                 <a href="{{ url('logout') }}" class="nav-link @if(Request::segment(2) == 'logout') active @endif">
-                    <i class="nav-icon bi bi-person-fill"></i>
+                    <i class="nav-icon bi bi-box-arrow-left"></i>
                     <p>Logout</p>
                 </a>
             </li>
