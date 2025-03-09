@@ -28,6 +28,7 @@ use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\FeesColectionController;
 use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\AssignClassTeacherController;
+use App\Http\Middleware\OnlineUser;
 
 Route::get('/', [AuthController::class, 'login']);
 Route::post('login', [AuthController::class, 'AuthLogin']);
@@ -294,12 +295,12 @@ Route::middleware(ParentMiddleware::class)->group(function () {
 
 
 });
-
-Route::middleware(CommonMiddleware::class)->group(function () {
-    Route::get('chat', [ChatController::class, 'chat']);
-    Route::post('submit_message', [ChatController::class, 'submit_message']);
-    Route::post('get_chat_windows', [ChatController::class, 'get_chat_windows']);
-    Route::post('get_chat_search_user', [ChatController::class, 'get_chat_search_user']);
-
+Route::middleware(OnlineUser::class)->group(function () {
+    Route::middleware(CommonMiddleware::class)->group(function () {
+        Route::get('chat', [ChatController::class, 'chat']);
+        Route::post('submit_message', [ChatController::class, 'submit_message']);
+        Route::post('get_chat_windows', [ChatController::class, 'get_chat_windows']);
+        Route::post('get_chat_search_user', [ChatController::class, 'get_chat_search_user']);
+    });
 });
 
